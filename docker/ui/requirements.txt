@@ -1,0 +1,8 @@
+panel
+ipywidgets
+ipyleaflet
+psutil 
+ipykernel
+ipywidgets_bokeh
+psycopg2
+sqlalchemy
