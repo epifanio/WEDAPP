@@ -8,7 +8,10 @@ import pandas as pd
 from wed_map import getMap, location_description
 from pg_init import init_pg_db
 import psycopg2
+from datetime import datetime as dt
+from jinja2 import Environment, FileSystemLoader
 
+env = Environment(loader=FileSystemLoader('/app/static'))
 
 # gmap_retiro_url = "https://www.google.com/maps/place/Junta+Municipal+del+Distrito+de+Retiro/@40.4023436,-3.6800094,17z/data=!4m6!3m5!1s0xd422610b505fc9d:0x643675481cabd4b0!8m2!3d40.4023395!4d-3.6774345!16s%2Fg%2F11c2nw4xrl?entry=ttu"
 # gmap_restaurant_url = "https://www.google.com/maps/place/Restaurante+Seeds/@40.4381732,-3.6866107,15z/data=!4m6!3m5!1s0xd42293d73d2c977:0x819dc39751a2d781!8m2!3d40.4381732!4d-3.6866107!16s%2Fg%2F11pd2xqyxl?entry=ttu"
@@ -94,7 +97,7 @@ def form_description_text(lang='en'):
 
 
 
-
+session_started = dt.now()
 
 html_intro_pane = pn.pane.HTML(intro_text(lang='en'), styles=styles)
 
@@ -357,6 +360,14 @@ bokeh_formatters = {
 }
 
 def get_data():
+    if hotel.value:
+        date_range = date_range_picker.value
+        room_details = room.value
+        guests = number_guest.value
+    else:
+        date_range = ''
+        room_details = ''
+        guests = 0
     data = {
         'Name': name.value,
         'Surname': surname.value,
@@ -372,9 +383,9 @@ def get_data():
         'Friday lunch': lunch.value,
         'Friday dinner': dinner.value,
         'Hotel': hotel.value,
-        'Room details': room.value,
-        'Days': date_range_picker.value,
-        'Guest': number_guest.value
+        'Room details': room_details,
+        'Days': date_range,
+        'Guest': guests
     }
     print(data)
     return data
@@ -401,6 +412,7 @@ df = pd.DataFrame({
 }, index=[])
 
 df_widget = pn.widgets.Tabulator(df, formatters=bokeh_formatters)
+df_widget.hidden_columns = ['index']
 
 add_row = pn.widgets.Button(name="Add row")
 remove_row = pn.widgets.Button(name="Remove selected rows")
@@ -408,13 +420,49 @@ remove_row = pn.widgets.Button(name="Remove selected rows")
 submit_button = pn.widgets.Button(name="Submit", button_type='primary')
 fetch_data_button = pn.widgets.Button(name="Fetch data logger")
 
+def reset_widgets_values(event):
+    name.value = ''
+    surname.value = ''
+    age_options.value = ''
+    cerimony.value = False
+    banquet.value = False
+    transportation.value = False
+    food_restrictions.value = False
+    food_restrictions_details.value = ''
+    allergy.value = False
+    allergy_details.value = ''
+    party.value = False
+    lunch.value = False
+    dinner.value = False
+    hotel.value = False
+    room.value = 'Single'
+    #try:
+    #     date_range_picker.value = (session_started, session_started)
+    #     date_range_picker.start = None
+    #     date_range_picker.end = None
+    # except ValueError:
+    #     print("failing to reset data time picker widget")
+    number_guest.value = 0
+
+
 def change_data(data):
+    # Add a check if mandatory values are set
+    # if not, raise a modal dialog to warn about the missing mandatory values
     data = get_data()
     # reset_data()
     #df.loc[:] = df_widget.value      
     df_widget.value.reset_index(inplace=True, drop=True)
     df_widget.value.loc[len(df_widget.value.index)] = data
     df_widget.value = df_widget.value.drop(df_widget.selection)
+    # reset_widgets_values()
+    try:
+    #    date_range_picker.value = (session_started, session_started)
+        date_range_picker.value = (None, None)
+    #    date_range_picker.start = None
+    #    date_range_picker.end = None
+    except ValueError as e:
+        print(f"failing to reset data time picker widget, exception was: {e}")
+    
     
     
 def remove_selected_rows(_):
@@ -426,9 +474,12 @@ def remove_selected_rows(_):
     df_widget.value.reset_index(inplace=True, drop=True)
     
 add_row.on_click(change_data)
+add_row.on_click(reset_widgets_values)
+
 remove_row.on_click(remove_selected_rows)
 
 submit_button.on_click(insert_data)
+
 fetch_data_button.on_click(fetch_data)
 
 button_italian = pn.widgets.Button(name="IT")
@@ -643,4 +694,22 @@ df_widget.disabled = True
 
 init_pg_db()
 
-pn.Column(translate_buttons, tabs).servable()
+
+
+jinja_template = env.get_template('template.html')
+tmpl = pn.Template(jinja_template)
+
+tmpl.add_variable('app_title', '<center><h1>Geno & Massi Sposi!</h1></center>')
+
+#tmpl.modal.append("## This is a modal")
+
+# Create a button
+#modal_btn = pn.widgets.Button(name="Click for modal")
+
+tmpl.add_panel('A', pn.Column(translate_buttons, tabs))
+
+
+
+tmpl.servable()
+
+# pn.Column(translate_buttons, tabs).servable("Massi & Geno")
