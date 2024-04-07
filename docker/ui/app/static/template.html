@@ -1,0 +1,21 @@
+{% extends base %}
+
+<!-- goes in head -->
+{% block postamble %}
+<!--  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
+<link rel="stylesheet" href="app/static/bootstrap.min.css">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+{% endblock %}
+
+<!-- goes in body -->
+{% block contents %}
+{{ app_title }}
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      {{ embed(roots.A) }}
+    </div>
+  </div>
+</div>
+{% endblock %}
