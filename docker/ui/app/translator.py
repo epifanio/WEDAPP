@@ -2,31 +2,31 @@ from wed_map import location_description
 
 def intro_text(lang='en'):
     if lang == 'en':
-        text = """ <h1> We're Getting Married, and We Want to Celebrate WITH YOU!</h1> <br>
+        text = """ <center> <h1> We're Getting Married, and would like to Celebrate with YOU!</h1></center> <br>
         <br>
-        <p style="font-family:'Courier New'; font-size:20px;"> Here are the most important details:<br>
+        <p style="font-family:'Courier New'; font-size:20px;"> Here is what you need to know, in a nutshell:<br>
         <br>
-        A simple ceremony will take place at the Retiro District Municipal Board at 11:00 a.m.<br>
+        A brief ceremony will take place at the Retiro District Hall at 11:00 a.m.<br>
         <br>
-        This will be followed by a grand banquet at the fabulous Seeds Restaurant, starting at 2:00 p.m., where<br>
-        we'll spend the entire afternoon among friends, music, refreshments, and a few surprises.<br>
+        A grand banquet will follow at the fabulous Seeds Restaurant from 14:00, where we’ll stay into <br>
+        the evening surrounded by friends, music, food, drinks, and other surprises.<br>
         <br>
-        And for those with more stamina, we'll see you at the post-wedding party at Black Jack club<br>
-        (better known to our close friends as the Cat's Temple) starting at 10:00 p.m.!
+        And to those of you who can handle it, we will see you at the after party, at the Black Jack Club <br>
+        (better known to some of us as the Cat Temple) from 22:00 p.m.!
         <br>
         All this and much more, on <b>June 15, 2024</b>.<br>
         <br>
-        We've created this app for you to confirm your attendance, as well as to provide us with any information we need to make everything perfect on that day,<br>
-        also for you!<br>
+        We have created this app so that you can confirm your attendance, as well as provide us with all <br>
+        the information we need to make that day perfect for you too.
         <br>
-        We eagerly await your response,<br>
+        We look forward to your presence!<br>
         <br>
-        Massi & Geno<br>
+        Geno & Massi<br>
         <br>
         <br></p>
-        P.S.: Please send us your form responses before June 1st!"""
+        P.S.: Please, fill in the form by June 1st!"""
     if lang == 'es':
-        text = """ <h1> Nos casamos, y queremos celebrarlo CONTIGO!</h1> <br>
+        text = """  <center> <h1> Nos casamos, y queremos celebrarlo CONTIGO!</h1></center> <br>
         <br>
         <p style="font-family:'Courier New'; font-size:20px;"> Estos son los datos más importantes:<br>
         <br>
@@ -51,7 +51,7 @@ def intro_text(lang='en'):
         <br></p>
         PD: Por favor, mandadnos las respuestas del formulario antes del 1 de junio!"""
     if lang == 'it':
-        text = """ <h1> Ci sposiamo e vogliamo festeggiare CON TE!</h1> <br>
+        text = """  <center> <h1> Ci sposiamo e vogliamo festeggiare CON TE!</h1></center> <br>
         <br>
         <p style="font-family:'Courier New'; font-size:20px;"> Ecco i dettagli più importanti:<br>
         <br>
@@ -78,11 +78,11 @@ def intro_text(lang='en'):
 
 def default_separator_text(lang='en'):
     if lang == 'en':
-        text = """ <p><h2><b> The Wedding Bash: What It Includes </b></h2></p>
+        text = """ <p><h2><b> The big, fat italo-spanish wedding: what's included </b></h2></p>
         <br>
         <hr style="height: 5px; background-color: #3498db;">
         <br>
-        Remember to add the details of all your companions, as well as your own, one by one."""
+        Remember to add all your details, as well as the details of all members of your party"""
     if lang == 'es':
         text = """ <p><h2><b> El bodorrio: todo lo que incluye </b></h2></p>
         <br>
@@ -112,9 +112,9 @@ def optional_separator_text(lang='en'):
 def html_donation_text(lang='en'):
     text = ''
     if lang == 'en':
-        text = """ <h2>Bank details:</h2> <br> 
+        text = """ <center><h2>Donation welcome!</h2></center> <br> 
         <p style="font-family:'Courier New'; font-size:20px;"> 
-        Donation welcome!<br>
+        Bank details:<br>
         <br>
         For <i>Bizum</1> use this number: <br>
         (+34) 686269566 <br>
@@ -130,9 +130,9 @@ def html_donation_text(lang='en'):
         <br>
         </p>"""
     if lang == 'es':
-        text = """ <h2>Bank details:</h2> <br> 
+        text = """ <center><h2>Se admiten donativos!</h2></center> <br> 
         <p style="font-family:'Courier New'; font-size:20px;"> 
-        Se admiten donativos!<br>
+        Bank details:<br>
         <br>
         Para hacer un <i>Bizum</1> usa este número: <br>
         (+34) 686269566 <br>
@@ -148,9 +148,9 @@ def html_donation_text(lang='en'):
         <br>
         </p>"""
     if lang == 'it':
-        text = """ <h2>Bank details:</h2> <br> 
+        text = """ <center><h2>Donazioni sono le benvenute!</h2></center> <br> 
         <p style="font-family:'Courier New'; font-size:20px;"> 
-        Donazioni sono ben accette!<br>
+        Bank details:<br>
         <br>
         Per <i>Bizum</1> usa questo numero: <br>
         (+34) 686269566 <br>
