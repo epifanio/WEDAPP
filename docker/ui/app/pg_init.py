@@ -9,7 +9,6 @@ def init_pg_db():
             'Age': [],
             'Cerimony': [],
             'Banquet': [],
-            'Transportation': [],
             'Food restrictions': [],
             'Food restrictions details': [],
             'Allergy': [],
@@ -37,14 +36,13 @@ def init_pg_db():
 
     # Define the table schema
     table_schema = """
-        CREATE TABLE IF NOT EXISTS guest (
+        CREATE TABLE IF NOT EXISTS guest_list (
             id SERIAL PRIMARY KEY,
             Name VARCHAR(100),
             Surname VARCHAR(100),
             Age VARCHAR(100),
             Cerimony BOOLEAN,
             Banquet BOOLEAN,
-            Transportation BOOLEAN,
             Food_restrictions BOOLEAN,
             Food_restrictions_details VARCHAR(255),
             Allergy BOOLEAN,
