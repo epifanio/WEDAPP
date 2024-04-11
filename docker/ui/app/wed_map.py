@@ -26,10 +26,10 @@ def getMap():
     gmap_url_casa_sposi = "https://www.google.com/maps/place/C%2F+de+Francisco+Silvela,+27,+6+c,+Salamanca,+28028+Madrid/@40.4313076,-3.6744468,17z/data=!3m1!4b1!4m5!3m4!1s0xd4228b77a09fc2d:0x69b75571be49d39!8m2!3d40.4313035!4d-3.6718719?entry=ttu"
     gmap_url_black_jack = "https://www.google.com/maps/place/Black+Jack+Club/@40.4187465,-3.7101133,17z/data=!3m1!4b1!4m6!3m5!1s0xd4229d71079ac6d:0x1a27a5ce4dada59b!8m2!3d40.4187424!4d-3.7075384!16s%2Fg%2F11kqq9rdk9?entry=ttu"
 
-    gmap_retiro = f"""<a href="{gmap_url_black_jack}" target="_blank"> C. de Trujillos, 7, Centro, 28013 Madrid </a>"""
-    gmap_restaurant = f"""<a href="{gmap_restaurant_url}" target="_blank"> C. de Serrano, 95, Chamartín, 28006 Madrid </a>"""
-    gmap_casa_sposi = f"""<a href="{gmap_url_casa_sposi}" target="_blank"> C. de Francisco Silvela, 27, 6 C 28028 Madrid </a>"""
-    gmap_black_jack = f"""<a href="{gmap_retiro_url}" target="_blank"> Pl. de Daoíz y Velarde, 2, Retiro, 28007 Madrid </a>"""
+    gmap_retiro = f"""<p style="font-family:'Courier New'; font-size:15px;"><a href="{gmap_retiro_url}" target="_blank"> Pl. de Daoíz y Velarde, 2, Retiro, 28007 Madrid </a></p>"""
+    gmap_restaurant = f"""<p style="font-family:'Courier New'; font-size:15px;"><a href="{gmap_restaurant_url}" target="_blank"> C. de Serrano, 95, Chamartín, 28006 Madrid </a></p>"""
+    gmap_casa_sposi = f"""<p style="font-family:'Courier New'; font-size:15px;"><a href="{gmap_url_casa_sposi}" target="_blank"> C. de Francisco Silvela, 27, 6 C, 28028 Madrid </a></p>"""
+    gmap_black_jack = f"""<p style="font-family:'Courier New'; font-size:15px;"><a href="{gmap_url_black_jack}" target="_blank"> C. de Trujillos, 7, Centro, 28013 Madrid </a></p>"""
 
     # attributes = [
     #     {'name': 'Party', 'description': '<b>Party post boda </b> <br> <a href="https://www.venuesplace.com/es/11035-black-jack" target="_blank">Black Jack Club</a> <br> C. de Trujillos, 7, Centro, 28013 Madrid'},
@@ -43,7 +43,7 @@ def getMap():
         {"name": "Party", "description": f"<b>Party post boda </b> <br> {gmap_black_jack}"},
         {"name": "Ricevimento", "description": f"<b>Ricevimento </b> <br> {gmap_restaurant}"},
         {"name": "Cerimonia", "description": f"<b>Cerimonia </b> <br> {gmap_retiro}"},
-        {"name": "Casa Sposi", "description": f"<b>Casa Sposi </b> <br>{gmap_casa_sposi}"}
+        {"name": "Casa degli Sposi", "description": f"<b>Casa degli Sposi </b> <br>{gmap_casa_sposi}"}
     ]
 
     # Add markers with labels
@@ -75,7 +75,7 @@ def location_description(lang='en'):
         restaurant = "Restaurant"
     if lang == 'it':
         cerimony = "Cerimonia"
-        casa_sposi = "Casa Sposi"
+        casa_sposi = "Casa degli Sposi"
         party_post_boda = "Party post boda"
         restaurant = "Ricevimento"
     if lang == 'es':
@@ -84,18 +84,19 @@ def location_description(lang='en'):
         party_post_boda = "Party post boda"
         restaurant = "Restaurante"
     
-        
+    
     gmap_retiro_url = "https://www.google.com/maps/place/Junta+Municipal+del+Distrito+de+Retiro/@40.4023436,-3.6800094,17z/data=!4m6!3m5!1s0xd422610b505fc9d:0x643675481cabd4b0!8m2!3d40.4023395!4d-3.6774345!16s%2Fg%2F11c2nw4xrl?entry=ttu"
     gmap_restaurant_url = "https://www.google.com/maps/place/Restaurante+Seeds/@40.4381732,-3.6866107,15z/data=!4m6!3m5!1s0xd42293d73d2c977:0x819dc39751a2d781!8m2!3d40.4381732!4d-3.6866107!16s%2Fg%2F11pd2xqyxl?entry=ttu"
     gmap_url_casa_sposi = "https://www.google.com/maps/place/C%2F+de+Francisco+Silvela,+27,+6+c,+Salamanca,+28028+Madrid/@40.4313076,-3.6744468,17z/data=!3m1!4b1!4m5!3m4!1s0xd4228b77a09fc2d:0x69b75571be49d39!8m2!3d40.4313035!4d-3.6718719?entry=ttu"
     gmap_url_black_jack = "https://www.google.com/maps/place/Black+Jack+Club/@40.4187465,-3.7101133,17z/data=!3m1!4b1!4m6!3m5!1s0xd4229d71079ac6d:0x1a27a5ce4dada59b!8m2!3d40.4187424!4d-3.7075384!16s%2Fg%2F11kqq9rdk9?entry=ttu"
-    gmap_retiro = f"""<a href="{gmap_retiro_url}" target="_blank"> C. de Trujillos, 7, Centro, 28013 Madrid </a>"""
-    gmap_restaurant = f"""<a href="{gmap_restaurant_url}" target="_blank"> C. de Serrano, 95, Chamartín, 28006 Madrid </a>"""
-    gmap_casa_sposi = f"""<a href="{gmap_url_casa_sposi}" target="_blank"> C. de Francisco Silvela, 27, 6 C, 28028 Madrid </a>"""
-    gmap_black_jack = f"""<a href="{gmap_url_black_jack}" target="_blank"> Pl. de Daoíz y Velarde, 2, Retiro, 28007 Madrid </a>"""
+
+    gmap_retiro = f"""<p style="font-family:'Courier New'; font-size:15px;"><a href="{gmap_retiro_url}" target="_blank"> Pl. de Daoíz y Velarde, 2, Retiro, 28007 Madrid </a></p>"""
+    gmap_restaurant = f"""<p style="font-family:'Courier New'; font-size:18px;"><a href="{gmap_restaurant_url}" target="_blank"> C. de Serrano, 95, Chamartín, 28006 Madrid </a></p>"""
+    gmap_casa_sposi = f"""<p style="font-family:'Courier New'; font-size:18px;"><a href="{gmap_url_casa_sposi}" target="_blank"> C. de Francisco Silvela, 27, 6 C, 28028 Madrid </a></p>"""
+    gmap_black_jack = f"""<p style="font-family:'Courier New'; font-size:18px;"><a href="{gmap_url_black_jack}" target="_blank"> C. de Trujillos, 7, Centro, 28013 Madrid </a></p>"""
     
-    retiro_description = f""" <p style="font-family:'Courier New'; font-size:20px;"><b>{cerimony} </b> <br> {gmap_retiro}</p>"""
-    restaurant_description = f""" <p style="font-family:'Courier New'; font-size:20px;"><b>{restaurant}</b> <br> {gmap_restaurant}</p>"""
-    casa_sposi_description = f""" <p style="font-family:'Courier New'; font-size:20px;"><b>{casa_sposi}</b> <br>{gmap_casa_sposi}</p>"""
-    black_jack_description = f"""<p style="font-family:'Courier New'; font-size:20px;"><b>{party_post_boda}</b> <br> {gmap_black_jack}</p>"""
+    retiro_description = f"""<p style="font-family:'Courier New'; font-size:20px;"><b>{cerimony} </b></p>  {gmap_retiro}"""
+    restaurant_description = f""" <p style="font-family:'Courier New'; font-size:20px;"><b>{restaurant}</b></p>  {gmap_restaurant}"""
+    casa_sposi_description = f""" <p style="font-family:'Courier New'; font-size:20px;"><b>{casa_sposi}</b></p>  {gmap_casa_sposi}"""
+    black_jack_description = f"""<p style="font-family:'Courier New'; font-size:20px;"><b>{party_post_boda}</b></p>  {gmap_black_jack}"""
     return retiro_description, restaurant_description, casa_sposi_description, black_jack_description
