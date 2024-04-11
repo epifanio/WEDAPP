@@ -2,7 +2,7 @@ from wed_map import location_description
 
 def intro_text(lang='en'):
     if lang == 'en':
-        text = """ <h1> We're Getting Married, and We Want to Celebrate WITH YOU </h1> <br>
+        text = """ <h1> We're Getting Married, and We Want to Celebrate WITH YOU!</h1> <br>
         <br>
         <p style="font-family:'Courier New'; font-size:20px;"> Here are the most important details:<br>
         <br>
@@ -26,7 +26,7 @@ def intro_text(lang='en'):
         <br></p>
         P.S.: Please send us your form responses before June 1st!"""
     if lang == 'es':
-        text = """ <h1> Nos casamos, y queremos celebrarlo CONTIGO </h1> <br>
+        text = """ <h1> Nos casamos, y queremos celebrarlo CONTIGO!</h1> <br>
         <br>
         <p style="font-family:'Courier New'; font-size:20px;"> Estos son los datos más importantes:<br>
         <br>
@@ -51,7 +51,7 @@ def intro_text(lang='en'):
         <br></p>
         PD: Por favor, mandadnos las respuestas del formulario antes del 1 de junio!"""
     if lang == 'it':
-        text = """ <h1> Ci sposiamo e vogliamo festeggiare CON TE </h1> <br>
+        text = """ <h1> Ci sposiamo e vogliamo festeggiare CON TE!</h1> <br>
         <br>
         <p style="font-family:'Courier New'; font-size:20px;"> Ecco i dettagli più importanti:<br>
         <br>
@@ -114,7 +114,8 @@ def html_donation_text(lang='en'):
     if lang == 'en':
         text = """ <h2>Bank details:</h2> <br> 
         <p style="font-family:'Courier New'; font-size:20px;"> 
-        Donation welcome!!! <br>
+        Donation welcome!<br>
+        <br>
         For <i>Bizum</1> use this number: <br>
         (+34) 686269566 <br>
         <br>
@@ -131,7 +132,8 @@ def html_donation_text(lang='en'):
     if lang == 'es':
         text = """ <h2>Bank details:</h2> <br> 
         <p style="font-family:'Courier New'; font-size:20px;"> 
-        Se admiten donativos!!! <br>
+        Se admiten donativos!<br>
+        <br>
         Para hacer un <i>Bizum</1> usa este número: <br>
         (+34) 686269566 <br>
         <br>
@@ -148,7 +150,8 @@ def html_donation_text(lang='en'):
     if lang == 'it':
         text = """ <h2>Bank details:</h2> <br> 
         <p style="font-family:'Courier New'; font-size:20px;"> 
-        Donazioni sono ben accette :) !!! <br>
+        Donazioni sono ben accette!<br>
+        <br>
         Per <i>Bizum</1> usa questo numero: <br>
         (+34) 686269566 <br>
         <br>
