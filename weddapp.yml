@@ -9,6 +9,7 @@ services:
       LOG_LEVEL: 'debug'
       BOKEH_LOG_LEVEL: 'debug'
       PYTHONUNBUFFERED: 1
+      # BOKEH_COOKIE_SECRET: 'my_super_safe_cookie_secret'
       # DOMAIN: weddapp.epinux.com
     networks:
       - net
@@ -47,6 +48,7 @@ services:
     volumes:
       - ./docker/ui/app:/app
       - ./docker/ui/entrypoint.sh:/entrypoint.sh
+      - ./docker/ui/credentials.json:/credentials.json
     entrypoint: /entrypoint.sh
 
 
