@@ -1,3 +1,4 @@
+import os
 import panel as pn
 #pn.extension()
 
@@ -14,19 +15,18 @@ from translator import intro_text, default_separator_text, optional_separator_te
 
 
 from hv_css import raw_css
+
+# import json
+
 #template="fast"
 
 pn.extension('tabulator', raw_css=[raw_css])
 
-env = Environment(loader=FileSystemLoader('/app/static'))
+# env = Environment(loader=FileSystemLoader('/app/static'))
 
 logout = pn.widgets.Button(name="Log out")
 logout.js_on_click(code="""window.location.href = './logout'""")
 
-# gmap_retiro_url = "https://www.google.com/maps/place/Junta+Municipal+del+Distrito+de+Retiro/@40.4023436,-3.6800094,17z/data=!4m6!3m5!1s0xd422610b505fc9d:0x643675481cabd4b0!8m2!3d40.4023395!4d-3.6774345!16s%2Fg%2F11c2nw4xrl?entry=ttu"
-# gmap_restaurant_url = "https://www.google.com/maps/place/Restaurante+Seeds/@40.4381732,-3.6866107,15z/data=!4m6!3m5!1s0xd42293d73d2c977:0x819dc39751a2d781!8m2!3d40.4381732!4d-3.6866107!16s%2Fg%2F11pd2xqyxl?entry=ttu"
-# gmap_url_casa_sposi = "https://www.google.com/maps/place/C%2F+de+Francisco+Silvela,+27,+6+c,+Salamanca,+28028+Madrid/@40.4313076,-3.6744468,17z/data=!3m1!4b1!4m5!3m4!1s0xd4228b77a09fc2d:0x69b75571be49d39!8m2!3d40.4313035!4d-3.6718719?entry=ttu"
-# gmap_url_black_jack = "https://www.google.com/maps/place/Black+Jack+Club/@40.4187465,-3.7101133,17z/data=!3m1!4b1!4m6!3m5!1s0xd4229d71079ac6d:0x1a27a5ce4dada59b!8m2!3d40.4187424!4d-3.7075384!16s%2Fg%2F11kqq9rdk9?entry=ttu"
 
 # TODO:
 # add phone numners
@@ -45,17 +45,14 @@ styles = {
     'border-radius': '5px', 'padding': '10px',
 }
 
-table_name = 'guest_list_session3'
+table_name = 'guest_list_session4'
 
 full_table = pn.widgets.Checkbox(name="visualize table details", visible=False)
 full_table.value = True
 
-
 session_started = dt.now()
 
 html_intro_pane = pn.pane.HTML(intro_text(lang='en'), styles=styles, sizing_mode="stretch_both")
-
-# html_form_pane = pn.pane.HTML(form_description_text(lang='en'), styles=styles)
 
 name_label = pn.pane.HTML(widget_labels['name_label'], width=75)
 name = pn.widgets.TextInput(name='', placeholder='...')
@@ -66,9 +63,9 @@ surname = pn.widgets.TextInput(name='', placeholder='...')
 age_options_label = pn.pane.HTML(widget_labels['age_options_label'], width=75)
 age_options = pn.widgets.Select(name='', options=['< 4', '4 - 8', '9 - 12', '> 12'], description='Age')
 
-cerimony = pn.widgets.Checkbox(name=widget_labels['cerimony']) # (Note, space is limited!)
+cerimony = pn.widgets.Checkbox(name=widget_labels['cerimony']) 
 
-banquet = pn.widgets.Checkbox(name=widget_labels['banquet']) # some question
+banquet = pn.widgets.Checkbox(name=widget_labels['banquet']) 
 
 food_restrictions = pn.widgets.Checkbox(name=widget_labels['food_restrictions'])
 
@@ -79,11 +76,11 @@ allergy = pn.widgets.Checkbox(name=widget_labels['allergy'])
 allergy_details_label = pn.pane.HTML(widget_labels['allergy_details_label'], visible=False)
 allergy_details = pn.widgets.TextInput(name='', placeholder='...', visible=False)
 
+
 foot_note_1 = pn.pane.HTML("<b><font color='red'>*</b>")
 foot_note_2 = pn.pane.HTML("<b><font color='red'>**</b>")
 foot_note_3 = pn.pane.HTML("<b><font color='red'>***</b>")
 foot_note_4 = pn.pane.HTML("<b><font color='red'>****</b>")
-
 
 
 foot_note_1_description = pn.pane.HTML(widget_labels['foot_note_1_description'] ) 
@@ -114,9 +111,9 @@ def insert_data(event):
                 Name, Surname, Age, Cerimony, Banquet,
                 Food_restrictions, Food_restrictions_details, Allergy,
                 Allergy_details, Party, Friday_lunch, Friday_dinner,
-                Hotel, Room_details, Days, Guest, Session
+                Hotel, Room_details, Days, Guest, Session, User_id
             ) VALUES (
-                %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
+                %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
             )
         """
         # Extract values from the current row
@@ -124,14 +121,14 @@ def insert_data(event):
             row['Name'], row['Surname'], row['Age'], row['Cerimony'], row['Banquet'],
             row['Food restrictions'], row['Food restrictions details'],
             row['Allergy'], row['Allergy details'], row['Party'], row['Friday lunch'],
-            row['Friday dinner'], row['Hotel'], row['Room details'], row['Days'], row['Guest'], row['Session']
+            row['Friday dinner'], row['Hotel'], row['Room details'], row['Days'], row['Guest'], row['Session'], row['User_id']
         )
 
         # Execute the insertion query
         cursor.execute(insert_query, values)
     try:
         print("insert_query")
-        print(insert_query)
+        print(insert_query, values)
         # Commit the changes
         conn.commit()
 
@@ -148,41 +145,35 @@ def insert_data(event):
         app.modal[0].append(modal_1_content)
         app.open_modal()
     
-    
+
 def fetch_data(event):
     # Connect to PostgreSQL
     conn = psycopg2.connect(
-        dbname='mydatabase',
-        user='myuser',
-        password='mypassword',
-        host='db'
+        dbname=os.getenv('POSTGRES_DB', 'mydatabase'),
+        user=os.getenv('POSTGRES_USER', 'myuser'),
+        password=os.getenv('POSTGRES_PASSWORD', 'mypassword'),
+        host=os.getenv('POSTGRES_HOST', 'db')
     )
-
     # Create a cursor object using the cursor() method
     cursor = conn.cursor()
-
     # Define the SQL query to fetch all data from the table
     select_query = f"SELECT * FROM {table_name}"
     print("select_query")
     print(select_query)
     # Execute the query
     cursor.execute(select_query)
-
     # Fetch all rows
     rows = cursor.fetchall()
-
     # Close the cursor and connection
     cursor.close()
     conn.close()
-
     # Convert the fetched data into a DataFrame
     column_names = [desc[0] for desc in cursor.description]
     df = pd.DataFrame(rows, columns=column_names)
-
     # Display the DataFrame
     pn.state.session_info['session_started'] = session_started
-    print('cookies: ', pn.state.curdoc.session_context.request.cookies)
-    print('session info', pn.state.session_info)
+    # print('cookies: ', pn.state.curdoc.session_context.request.cookies)
+    # print('session info', pn.state.session_info)
     print(df)
 
 
@@ -207,7 +198,6 @@ def show_food_restrictions_details(event):
         food_restrictions_details.visible = False
 
 food_restrictions.param.watch(show_food_restrictions_details, 'value')
-
 
 party = pn.widgets.Checkbox(name=widget_labels['party']) # (Note, adult only!)
 
@@ -253,7 +243,6 @@ def show_accomodation_details(event):
 
 hotel.param.watch(show_accomodation_details, 'value')
 
-
 default_separator = pn.pane.HTML(default_separator_text(lang='en'), width=600)
 
 optional_separator = pn.pane.HTML(optional_separator_text(lang='en'), width=600)
@@ -269,8 +258,6 @@ extra = pn.Column(pn.Row(lunch, foot_note_3),
                                    number_guest_label, 
                                    number_guest)),
                   )
-
-
 
 bokeh_formatters = {
     'Name': StringFormatter(),
@@ -290,6 +277,7 @@ bokeh_formatters = {
     'Days': StringFormatter(),
     'Guest': NumberFormatter(),
     'Session': StringFormatter(),
+    'User_id': StringFormatter(),
 }
 
 def get_data():
@@ -318,7 +306,8 @@ def get_data():
         'Room details': room_details,
         'Days': date_range,
         'Guest': guests,
-        'Session': session_started
+        'Session': session_started,
+        'User_id': pn.state.user
     }
     print(data)
     return data
@@ -342,43 +331,45 @@ df = pd.DataFrame({
         'Days': [],
         'Guest': [],
         'Session': [],
+        'User_id': [],
 }, index=[])
 
 df_widget = pn.widgets.Tabulator(df, formatters=bokeh_formatters)
-# df_widget.hidden_columns = ['index', 'Session']
 
 df_widget.hidden_columns = ['index', 
-                                    'Session', 
-                                    'Age', 
-                                    'Cerimony', 
-                                    'Banquet', 
-                                    'Food restrictions', 
-                                    'Food restrictions details', 
-                                    'Allergy', 
-                                    'Allergy details', 
-                                    'Allergy details',
-                                    'Party',
-                                    'Friday lunch',
-                                    'Friday dinner',
-                                    'Hotel',
-                                    'Room details',
-                                    'Days',
-                                    'Guest',
-                                    'Session']
+                            'Session', 
+                            'Age', 
+                            'Cerimony', 
+                            'Banquet', 
+                            'Food restrictions', 
+                            'Food restrictions details', 
+                            'Allergy', 
+                            'Allergy details', 
+                            'Allergy details',
+                            'Party',
+                            'Friday lunch',
+                            'Friday dinner',
+                            'Hotel',
+                            'Room details',
+                            'Days',
+                            'Guest',
+                            'Session',
+                            'User_id']
 
-add_row = pn.widgets.Button(name="Add New Record")
-remove_row = pn.widgets.Button(name="Remove Selected Record")
+add_row = pn.widgets.Button(name="Add New Record", button_type='success')
+remove_row = pn.widgets.Button(name="Remove Selected Record", button_type='danger')
 
-show_details = pn.widgets.Button(name="Show Table details")
+show_details = pn.widgets.Button(name="Show Table details", button_type='warning')
 
 submit_button = pn.widgets.Button(name="Submit Records", button_type='primary')
+
 fetch_data_button = pn.widgets.Button(name="Fetch data logger")
 
 
 def show_table_details(event):
     print(full_table.value)
     if full_table.value:
-        df_widget.hidden_columns = ['index', 'Session']
+        df_widget.hidden_columns = ['index', 'Session', 'User_id']
         full_table.value = False
     else: 
         df_widget.hidden_columns = ['index', 
@@ -574,7 +565,6 @@ def on_button_english_clicked(_):
     optional_separator.object = optional_separator_text(lang='en')
 
 
-
 def on_button_spanish_clicked(_):
     change_widget_labels(lang='es')
     html_intro_pane.object = intro_text(lang='es')
@@ -582,7 +572,6 @@ def on_button_spanish_clicked(_):
     default_separator.object = default_separator_text(lang='es')
     optional_separator.object = optional_separator_text(lang='es')
 
-    
 
 button_italian.on_click(on_button_italian_clicked)
 button_english.on_click(on_button_english_clicked)
@@ -630,34 +619,9 @@ df_widget.disabled = True
 
 init_pg_db(table_name)
 
+# widgets = pn.Column(f"Congrats `{pn.state.user}` You got access!")
 
-jinja_template = env.get_template('template.html')
-tmpl = pn.Template(jinja_template)
-
-#tmpl.modal.append("## This is a modal")
-
-# Create a button
-#modal_btn = pn.widgets.Button(name="Click for modal")
-
-# tmpl.add_panel('A', pn.Column(logout, translate_buttons, tabs))
-# tmpl.add_variable('app_title', '<center><h1>♥ Geno & Massi Sposi! ♥</h1></center>')
-# tmpl.servable('Geno & Massi Sposi!')
-
-# widgets = pn.Column(f"Congrats `{pn.state.user}`. You got access!", logout, pn.Column(translate_buttons, tabs))
 widgets = pn.Column(pn.Column(pn.Row(translate_buttons, logout), tabs))
-
-# app.servable()
-
-# modal_1_content = pn.Row(pn.pane.Markdown("## This is a modal"))
-# modal_btn = pn.widgets.Button(name="Click for modal")
-
-# def open_modal(event):
-#     app.modal[0].clear()
-#     app.modal[0].append(modal_1_content)
-#     app.open_modal()
-    
-# modal_btn.on_click(open_modal)
-
 
 app = pn.template.FastListTemplate(
     site="♥", title="Geno & Massi Sposi!",
@@ -666,14 +630,7 @@ app = pn.template.FastListTemplate(
 )
 
 app.modal.append(pn.Column())
-
 app.modal[0].clear()
-app.modal[0].append(modal_1_content)
-
-# app.main[0].append(modal_btn)
-
+# app.modal[0].append(modal_1_content)
 app.servable()
 
-print(dir(app))
-print(app.meta_viewport)
-# pn.Column(translate_buttons, tabs).servable("Massi & Geno")
