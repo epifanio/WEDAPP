@@ -1,7 +1,7 @@
 import psycopg2
 import pandas as pd
 
-def init_pg_db():
+def init_pg_db(table):
     # Load your DataFrame (replace this with your actual DataFrame)
     df = pd.DataFrame({
             'Name': [],
@@ -20,6 +20,7 @@ def init_pg_db():
             'Room details': [],
             'Days': [],
             'Guest': [],
+            'Session' : [],
     }, index=[])
 
 
@@ -35,8 +36,8 @@ def init_pg_db():
     cursor = conn.cursor()
 
     # Define the table schema
-    table_schema = """
-        CREATE TABLE IF NOT EXISTS guest_list (
+    table_schema = f"""
+        CREATE TABLE IF NOT EXISTS {table} (
             id SERIAL PRIMARY KEY,
             Name VARCHAR(100),
             Surname VARCHAR(100),
@@ -53,7 +54,8 @@ def init_pg_db():
             Hotel BOOLEAN,
             Room_details VARCHAR(255),
             Days VARCHAR(100),
-            Guest INTEGER
+            Guest INTEGER,
+            Session timestamp
         )
     """
 
