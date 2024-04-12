@@ -5,5 +5,6 @@ else
     PREFIX_PARAM="--prefix ${PREFIX}";
 fi
 
-panel serve --port ${PORT} --basic-auth my_password --cookie-secret my_super_safe_cookie_secret --address 0.0.0.0 --allow-websocket-origin ${ORIGIN} ${PREFIX_PARAM} --log-level ${LOG_LEVEL} --autoreload /app 
+panel serve --port ${PORT} --basic-auth /app/credentials.json --cookie-secret my_super_safe_cookie_secret --address 0.0.0.0 --allow-websocket-origin ${ORIGIN} ${PREFIX_PARAM} --log-level ${LOG_LEVEL} --autoreload /app 
+# panel serve --port ${PORT} --login-endpoint="/signin" --logout-endpoint="/signoff" --oauth-extra-params="{'scope': 'https://www.googleapis.com/auth/userinfo.email'}" --address 0.0.0.0 --allow-websocket-origin ${ORIGIN} ${PREFIX_PARAM} --log-level ${LOG_LEVEL} --autoreload /app 
 
