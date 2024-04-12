@@ -40,7 +40,7 @@ def getMap():
 
     
     attributes = [
-        {"name": "Party", "description": f"<b>Party post boda </b> <br> {gmap_black_jack}"},
+        {"name": "Party", "description": f"<b> After Party </b> <br> {gmap_black_jack}"},
         {"name": "Ricevimento", "description": f"<b>Ricevimento </b> <br> {gmap_restaurant}"},
         {"name": "Cerimonia", "description": f"<b>Cerimonia </b> <br> {gmap_retiro}"},
         {"name": "Casa degli Sposi", "description": f"<b>Casa degli Sposi </b> <br>{gmap_casa_sposi}"}
@@ -70,18 +70,18 @@ def getMap():
 def location_description(lang='en'):
     if lang == 'en':
         cerimony = "Ceremony"
-        casa_sposi = "Bride's house"
-        party_post_boda = "Party post boda"
+        casa_sposi = "Bride and Groom's house"
+        party_post_boda = "After Party"
         restaurant = "Restaurant"
     if lang == 'it':
         cerimony = "Cerimonia"
         casa_sposi = "Casa degli Sposi"
-        party_post_boda = "Party post boda"
+        party_post_boda = "Festa post-matrimonio"
         restaurant = "Ricevimento"
     if lang == 'es':
         cerimony = "Ceremonia"
         casa_sposi = "Casa de los novios"
-        party_post_boda = "Party post boda"
+        party_post_boda = "Fiesta post-boda"
         restaurant = "Restaurante"
     
     
