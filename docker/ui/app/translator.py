@@ -2,75 +2,103 @@ from wed_map import location_description
 
 def intro_text(lang='en'):
     if lang == 'en':
-        text = """ <center> <h1> We're Getting Married, and would like to Celebrate with YOU!</h1></center> <br>
+        text = """<center> <h1>We're Getting Married, and would like to Celebrate with YOU!</h1></center> 
         <br>
-        <p style="font-family:'Courier New'; font-size:20px;"> Here is what you need to know, in a nutshell:<br>
         <br>
-        A brief ceremony will take place at the Retiro District Hall at 11:00 a.m.<br>
+        <p style="font-family:'Courier New';"> Here is what you need to know, in a nutshell:
         <br>
-        A grand banquet will follow at the fabulous Seeds Restaurant from 14:00, where we’ll stay into <br>
-        the evening surrounded by friends, music, food, drinks, and other surprises.<br>
         <br>
-        And to those of you who can handle it, we will see you at the after party, at the Black Jack Club <br>
-        (better known to some of us as the Cat Temple) from 22:00 p.m.!
+        A brief ceremony will take place at the Retiro District Hall at 11:00 a.m.
         <br>
-        All this and much more, on <b>June 15, 2024</b>.<br>
         <br>
-        We have created this app so that you can confirm your attendance, as well as provide us with all <br>
-        the information we need to make that day perfect for you too.
+        A grand banquet will follow at the fabulous Seeds Restaurant from 14:00, where we’ll 
+        stay into the evening surrounded by friends, music, refreshments, and other surprises.
         <br>
-        We look forward to your presence!<br>
         <br>
-        Geno & Massi<br>
+        And to those of you who can handle it, we will see you at the after party, at the 
+        Black Jack Club (better known to some of us as the Cat Temple) from 22:00!
+        <br>
+        <br>
+        All this and much more, on <b>June 15, 2024</b>.
+        <br>
+        <br>
+        We have created this app so that you can confirm your attendance, as well as provide us
+        with all the information we need to make that day perfect for you too.
+        <br>
+        <br>
+        We look forward to your presence!
+        <br>
+        <br>
+         <h2 align="center">♥ Geno & Massi  ♥</h2>
+        <br>
         <br>
         <br></p>
         P.S.: Please, fill in the form by June 1st!"""
     if lang == 'es':
-        text = """  <center> <h1> Nos casamos, y queremos celebrarlo CONTIGO!</h1></center> <br>
+        text = """  <center> <h1>Nos casamos, y queremos celebrarlo CONTIGO!</h1></center> 
         <br>
-        <p style="font-family:'Courier New'; font-size:20px;"> Estos son los datos más importantes:<br>
         <br>
-        Una sencilla ceremonia tendrá lugar en la Junta Municipal de Distrito de Retiro a las 11:00.<br>
+        <p style="font-family:'Courier New';"> Estos son los datos más importantes:
         <br>
-        Le seguirá un gran banquete en el fabuloso Restaurante Seeds, a partir de las 14:00, y donde <br>
-        pasaremos toda la tarde entre amigos, música, refrigerios, y alguna que otra sorpresa.<br>
         <br>
-        Y a los que tengáis más aguante, os vemos en la fiesta post-boda en el club Black Jack<br>
-        (más conocido para los allegados como el Templo del Gato) a partir de las 22:00!<br>
+        Una sencilla ceremonia tendrá lugar en la Junta Municipal de Distrito de Retiro a las 11:00.
         <br>
-        Todo esto y mucho más, el <b>15 de junio de 2024</b>.<br>
         <br>
-        Hemos creado esta applicación para que nos puedas confirmar tu asistencia, así como para <br>
-        trasladarnos toda la información que nos hacen falta para que todo sea perfecto ese día, <br>
-        también para tí!<br>
+        Le seguirá un gran banquete en el fabuloso Restaurante Seeds, a partir de las 14:00, y donde
+        pasaremos toda la tarde entre amigos, música, refrigerios, y alguna que otra sorpresa.
         <br>
-        Os esperamos ansiosos,<br>
         <br>
-        Massi & Geno<br>
+        Y a los que tengáis más aguante, os vemos en la fiesta post-boda en el club Black Jack
+        (más conocido para los allegados como el Templo del Gato) a partir de las 22:00!
+        <br>
+        <br>
+        Todo esto y mucho más, el <b>15 de junio de 2024</b>.
+        <br>
+        <br>
+        Hemos creado esta applicación para que nos puedas confirmar tu asistencia, así como para 
+        trasladarnos toda la información que nos hacen falta para que todo sea perfecto ese día, 
+        también para tí!
+        <br>
+        <br>
+        Os esperamos ansiosos!
+        <br>
+        <br>
+         <h2 align="center">♥ Geno & Massi ♥</h2>
+        <br>
         <br>
         <br></p>
         PD: Por favor, mandadnos las respuestas del formulario antes del 1 de junio!"""
     if lang == 'it':
-        text = """  <center> <h1> Ci sposiamo e vogliamo festeggiare CON TE!</h1></center> <br>
+        text = """  <center> <h1>Ci sposiamo e ci piacerebbe festeggiarlo con VOI!</h1></center> 
         <br>
-        <p style="font-family:'Courier New'; font-size:20px;"> Ecco i dettagli più importanti:<br>
         <br>
-        Una semplice cerimonia avrà luogo presso il Municipio del Distretto di Retiro alle 11:00.<br>
+        <p style="font-family:'Courier New';"> Ecco i dettagli più importanti:
         <br>
-        Seguirà un grande banchetto nel favoloso Ristorante Seeds, a partire dalle 14:00, dove<br>
-        trascorreremo tutto il pomeriggio tra amici, musica, rinfreschi e qualche sorpresa.<br>
         <br>
-        E per coloro che hanno più resistenza, ci vediamo alla festa post-matrimonio nel club Black Jack<br>
+        Una semplice cerimonia avrà luogo presso il Municipio del Distretto di Retiro alle 11:00.
+        <br>
+        <br>
+        Seguirà un grande banchetto nel favoloso Ristorante Seeds, a partire dalle 14:00, dove
+        trascorreremo tutto il pomeriggio tra amici, musica, rinfreschi e qualche sorpresa.
+        <br>
+        <br>
+        E per coloro che hanno più resistenza, ci vediamo alla festa post-matrimonio nel club Black Jack
         (meglio conosciuto tra gli amici come il Tempio del Gatto) a partire dalle 22:00!
         <br>
-        Tutto questo e molto altro, il <b>15 giugno 2024</b>.<br>
         <br>
-        Abbiamo creato questa app per permetterti di confermare la tua presenza, e anche per fornirci tutte le informazioni necessarie per rendere perfetto quel giorno,<br>
-        anche per te!<br>
+        Tutto questo e molto altro, il <b>15 giugno 2024</b>.
         <br>
-        Attendiamo con ansia la tua risposta,<br>
         <br>
-        Massi & Geno<br>
+        Abbiamo creato questa app per permetterti di confermare la tua presenza,
+        e per fornirci tutte le informazioni necessarie per rendere perfetto questo giorno,
+        anche per te!
+        <br>
+        <br>
+        Attendiamo con ansia la tua risposta!
+        <br>
+        <br>
+         <h2 align="center">♥ Geno & Massi ♥</h2>
+        <br>
         <br>
         <br></p>
         P.S.: Ti preghiamo di inviarci le risposte al modulo prima del 1° giugno!"""
@@ -79,33 +107,27 @@ def intro_text(lang='en'):
 def default_separator_text(lang='en'):
     if lang == 'en':
         text = """ <p><h2><b> The big, fat italo-spanish wedding: what's included </b></h2></p>
-        <br>
         <hr style="height: 5px; background-color: #3498db;">
-        <br>
         Remember to add all your details, as well as the details of all members of your party"""
     if lang == 'es':
         text = """ <p><h2><b> El bodorrio: todo lo que incluye </b></h2></p>
-        <br>
         <hr style="height: 5px; background-color: #3498db;">
-        <br> 
         Acuérdate de agregar los datos de todos tus acompañantes, así como los tuyos propios, de uno en uno"""
     if lang == 'it':
         text = """<p><h2><b> Il Matrimonio: Tutto ciò che Include </b></h2></p>
-        <br>
         <hr style="height: 5px; background-color: #3498db;">
-        <br> 
         Ricorda di aggiungere i dati di tutti i tuoi accompagnatori, così come i tuoi, uno per uno. """
     return text
 
 def optional_separator_text(lang='en'):
     if lang == 'en':
-        text = """<p><h3><b>Logistic support and bits not included</b></h3></p>
+        text = """<p><h2><b>Logistic support and bits not included</b></h2></p>
         <hr style="height: 5px; background-color: #3498db;">"""
     if lang == 'es':
-        text = """<p><h3><b>Apoyo logístico a y cosas que no están incluidas</b></h3></p>
+        text = """<p><h2><b>Apoyo logístico a y cosas que no están incluidas</b></h2></p>
         <hr style="height: 5px; background-color: #3498db;">"""
     if lang == 'it':
-        text = """<p><h3><b>Appoggio logistico e cose che non sono incluse</b></h3></p>
+        text = """<p><h2><b>Appoggio logistico e cose che non sono incluse</b></h2></p>
         <hr style="height: 5px; background-color: #3498db;">"""
     return text
 
@@ -179,7 +201,7 @@ def change_widget_labels_text(lang='en'):
         widget_labels['food_restrictions_details_label'] = "Dietary Restrictions"
         widget_labels['allergy'] = "Yes, I have some food allergies or intolerances"
         widget_labels['allergy_details_label'] = "Allergies or Intolerance"
-        widget_labels['party'] = "Yes, I will go to the post-wedding party. Let's give it our all!"
+        widget_labels['party'] = "Yes, I will go to the after party. Let's give it our all!"
         widget_labels['lunch'] = "Yes, I'm up for lunch on Friday the 14th" # (on my own, at a restaurant yet to be decided)
         widget_labels['dinner'] = "Yes, I'm up for dinner on Friday the 14th" # (on my own, at a restaurant yet to be decided)
         widget_labels['hotel'] = "Yes, I would like you to help me book a hotel near Massi and Geno's house"
@@ -194,6 +216,12 @@ def change_widget_labels_text(lang='en'):
         widget_labels['restaurant_description_pane'] = restaurant_description_pane
         widget_labels['casa_sposi_description_pane'] = casa_sposi_description_pane
         widget_labels['black_jack_description_pane'] = black_jack_description_pane
+        widget_labels['modal_0_content'] = """<p style="font-family:'Courier New';"><b>Sorry, Can't add a record. Please check that you have provided an answer for the mandatory fields! <br> ['Name', 'Surname']</b></p>"""
+        widget_labels['modal_1_content'] = """<p style="font-family:'Courier New';"><b>Can't submit empty Table! First add some records, and do not forget to fill the mandatory fields! <br> ['Name', 'Surname']</b></p>"""
+        widget_labels['modal_2_content'] = """<p style="font-family:'Courier New';"><b>Record inserted successfully!</b></p>"""
+        widget_labels['modal_3_content'] = """<p style="font-family:'Courier New';"><b>Congratulations all records have been successfully submitted!</b></p>"""
+        widget_labels['modal_4_content'] = """<p style="font-family:'Courier New';"><b>Selection is empy, no records removed. Make sure to select one or more records from the Table.</b></p>"""
+
 
     if lang == 'it':
         widget_labels['name_label'] = 'Nome'
@@ -220,7 +248,12 @@ def change_widget_labels_text(lang='en'):
         widget_labels['restaurant_description_pane'] = restaurant_description_pane
         widget_labels['casa_sposi_description_pane'] = casa_sposi_description_pane
         widget_labels['black_jack_description_pane'] = black_jack_description_pane
-        
+        widget_labels['modal_0_content'] = "Scusa, non posso aggiungere un record. Controlla di aver fornito una risposta per i campi obbligatori! <br> ['Nome', 'Cognome']"
+        widget_labels['modal_1_content'] = "Scusa, non posso inviare una tabella vuota! Prima aggiungi alcuni record, e non dimenticare di compilare i campi obbligatori! <br> ['Nome', 'Cognome']"
+        widget_labels['modal_2_content'] = "Record inserito con successo!"
+        widget_labels['modal_3_content'] = "Congratulazioni tutti i record sono stati inviati con successo!"
+        widget_labels['modal_4_content'] = """<p style="font-family:'Courier New';"><b>La Selezione è vuota, nessun record rimosso. Assicurati di selezionare uno o più record dalla tabella.</b></p>"""
+         
 
     if lang == 'es':
         widget_labels['name_label'] = 'Nombre'
@@ -247,4 +280,9 @@ def change_widget_labels_text(lang='en'):
         widget_labels['restaurant_description_pane'] = restaurant_description_pane
         widget_labels['casa_sposi_description_pane'] = casa_sposi_description_pane
         widget_labels['black_jack_description_pane'] = black_jack_description_pane
+        widget_labels['modal_0_content'] = "Lo siento, no puedo agregar un registro. ¡Por favor, verifica que has proporcionado una respuesta para los campos obligatorios! <br> ['Nombre', 'Apellidos']"
+        widget_labels['modal_1_content'] = "¡No puedo enviar una tabla vacía! ¡Primero agrega algunos registros, y no olvides completar los campos obligatorios! <br> ['Nombre', 'Apellidos']"
+        widget_labels['modal_2_content'] = "¡Registro insertado con éxito!"
+        widget_labels['modal_3_content'] = "¡Felicidades todos los registros se han enviado con éxito!"
+        widget_labels['modal_4_content'] = """<p style="font-family:'Courier New';"><b>La Selección está vacía, no se eliminaron registros. Asegúrate de seleccionar uno o más registros de la tabla.</b></p>"""    
     return widget_labels
