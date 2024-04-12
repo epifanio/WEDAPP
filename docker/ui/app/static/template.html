@@ -3,14 +3,18 @@
 <!-- goes in head -->
 {% block postamble %}
 <link rel="stylesheet" href="app/static/bootstrap.min.css">
+<link rel="stylesheet" href="app/static/custom.css">
 <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 {% endblock %}
 
 <!-- goes in body -->
+<body style="background-color:oldlace; padding:25px;">
 {% block contents %}
 {{ app_title }}
 <br>
 <div class="container">
   {{ embed(roots.A) }}
 </div>
+</div>
 {% endblock %}
+</body>
