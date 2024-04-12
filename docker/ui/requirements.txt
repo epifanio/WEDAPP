@@ -6,3 +6,4 @@ ipykernel
 ipywidgets_bokeh
 psycopg2
 sqlalchemy
+cryptography

@@ -21,6 +21,7 @@ def init_pg_db(table):
             'Days': [],
             'Guest': [],
             'Session' : [],
+            'User_id': [],
     }, index=[])
 
 
@@ -55,7 +56,8 @@ def init_pg_db(table):
             Room_details VARCHAR(255),
             Days VARCHAR(100),
             Guest INTEGER,
-            Session timestamp
+            Session timestamp,
+            User_id VARCHAR(100)
         )
     """
 
