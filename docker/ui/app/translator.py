@@ -216,6 +216,11 @@ def change_widget_labels_text(lang='en'):
         widget_labels['restaurant_description_pane'] = restaurant_description_pane
         widget_labels['casa_sposi_description_pane'] = casa_sposi_description_pane
         widget_labels['black_jack_description_pane'] = black_jack_description_pane
+        widget_labels['add_row'] = 'Add Bew Record'
+        widget_labels['remove_row'] = 'Remove Selected Record'
+        widget_labels['show_details'] = 'Show Table Details'
+        widget_labels['submit_button'] = 'Submit Table'
+        widget_labels['fetch_data_button'] = 'Fetch Data'
         widget_labels['modal_0_content'] = """<p style="font-family:'Courier New';"><b>Sorry, Can't add a record. Please check that you have provided an answer for the mandatory fields! <br> ['Name', 'Surname']</b></p>"""
         widget_labels['modal_1_content'] = """<p style="font-family:'Courier New';"><b>Can't submit empty Table! First add some records, and do not forget to fill the mandatory fields! <br> ['Name', 'Surname']</b></p>"""
         widget_labels['modal_2_content'] = """<p style="font-family:'Courier New';"><b>Record inserted successfully!</b></p>"""
@@ -248,6 +253,11 @@ def change_widget_labels_text(lang='en'):
         widget_labels['restaurant_description_pane'] = restaurant_description_pane
         widget_labels['casa_sposi_description_pane'] = casa_sposi_description_pane
         widget_labels['black_jack_description_pane'] = black_jack_description_pane
+        widget_labels['add_row'] = 'Aggiungi Nuova Riga'
+        widget_labels['remove_row'] = 'Rimuovi Righe Selezionate'
+        widget_labels['show_details'] = 'Visualizza Dettgli Tabella'
+        widget_labels['submit_button'] = 'Invia Tabella'
+        widget_labels['fetch_data_button'] = 'Controlla i tuoi Dati'
         widget_labels['modal_0_content'] = "Scusa, non posso aggiungere un record. Controlla di aver fornito una risposta per i campi obbligatori! <br> ['Nome', 'Cognome']"
         widget_labels['modal_1_content'] = "Scusa, non posso inviare una tabella vuota! Prima aggiungi alcuni record, e non dimenticare di compilare i campi obbligatori! <br> ['Nome', 'Cognome']"
         widget_labels['modal_2_content'] = "Record inserito con successo!"
@@ -280,6 +290,11 @@ def change_widget_labels_text(lang='en'):
         widget_labels['restaurant_description_pane'] = restaurant_description_pane
         widget_labels['casa_sposi_description_pane'] = casa_sposi_description_pane
         widget_labels['black_jack_description_pane'] = black_jack_description_pane
+        widget_labels['add_row'] = 'Add New Line'
+        widget_labels['remove_row'] = 'Remove Selected Line'
+        widget_labels['show_details'] = 'Show Table Details'
+        widget_labels['submit_button'] = 'Submit Table'
+        widget_labels['fetch_data_button'] = 'Fetch Data'
         widget_labels['modal_0_content'] = "Lo siento, no puedo agregar un registro. ¡Por favor, verifica que has proporcionado una respuesta para los campos obligatorios! <br> ['Nombre', 'Apellidos']"
         widget_labels['modal_1_content'] = "¡No puedo enviar una tabla vacía! ¡Primero agrega algunos registros, y no olvides completar los campos obligatorios! <br> ['Nombre', 'Apellidos']"
         widget_labels['modal_2_content'] = "¡Registro insertado con éxito!"

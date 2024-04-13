@@ -24,7 +24,7 @@ pn.extension('tabulator', raw_css=[raw_css])
 
 # env = Environment(loader=FileSystemLoader('/app/static'))
 
-logout = pn.widgets.Button(name="Log out")
+logout = pn.widgets.Button(name="Log out", button_type='danger')
 logout.js_on_click(code="""window.location.href = './logout'""")
 
 
@@ -157,7 +157,7 @@ def fetch_data(event):
     # Create a cursor object using the cursor() method
     cursor = conn.cursor()
     # Define the SQL query to fetch all data from the table
-    select_query = f"SELECT * FROM {table_name}"
+    select_query = f"SELECT * FROM {table_name} WHERE User_id = '{pn.state.user}'"
     print("select_query")
     print(select_query)
     # Execute the query
@@ -170,11 +170,49 @@ def fetch_data(event):
     # Convert the fetched data into a DataFrame
     column_names = [desc[0] for desc in cursor.description]
     df = pd.DataFrame(rows, columns=column_names)
+    print(df)
     # Display the DataFrame
-    pn.state.session_info['session_started'] = session_started
+    
+    # print(df.columns)
+    
+    # pn.state.session_info['session_started'] = session_started
     # print('cookies: ', pn.state.curdoc.session_context.request.cookies)
     # print('session info', pn.state.session_info)
-    print(df)
+    # variable_names = [col for col in df.columns if col not in ['name', 'surname']]
+    df['datetime'] = pd.to_datetime(df['session'])
+
+    # Find the most recent datetime value
+    recent_df = df[df['datetime'] == df['datetime'].max()]
+    recent_df['Full name'] = recent_df['name'].str.cat(recent_df['surname'], sep=' ')
+    recent_df.drop(columns=['name', 'surname', 'id', 'datetime', 'session'], inplace=True)
+    recent_df.replace({True: 'yes', False: 'no'}, inplace=True)
+
+    column_names = list(recent_df.columns)
+    dft = recent_df.transpose()
+    dft.insert(0, 'Fields', column_names)
+    results_log_pane.object =dft.to_html(index=False)
+
+    
+
+
+def query_to_html_table(query_result):
+    html_table = "<table border='1'>\n"
+    
+    # Adding table headers
+    html_table += "<tr>"
+    for column_name in query_result[0].keys():
+        html_table += "<th>{}</th>".format(column_name)
+    html_table += "</tr>\n"
+    
+    # Adding table rows
+    for row in query_result:
+        html_table += "<tr>"
+        for value in row.values():
+            html_table += "<td>{}</td>".format(value)
+        html_table += "</tr>\n"
+    
+    html_table += "</table>"
+    return html_table
 
 
 def show_allergy_details(event):
@@ -356,14 +394,17 @@ df_widget.hidden_columns = ['index',
                             'Session',
                             'User_id']
 
-add_row = pn.widgets.Button(name="Add New Record", button_type='success')
-remove_row = pn.widgets.Button(name="Remove Selected Record", button_type='danger')
 
-show_details = pn.widgets.Button(name="Show Table details", button_type='warning')
 
-submit_button = pn.widgets.Button(name="Submit Records", button_type='primary')
+add_row = pn.widgets.Button(name=widget_labels['add_row'], button_type='success')
 
-fetch_data_button = pn.widgets.Button(name="Fetch data logger")
+remove_row = pn.widgets.Button(name=widget_labels['remove_row'], button_type='danger')
+
+show_details = pn.widgets.Button(name=widget_labels['show_details'], button_type='warning')
+
+submit_button = pn.widgets.Button(name=widget_labels['submit_button'], button_type='primary')
+
+fetch_data_button = pn.widgets.Button(name=widget_labels['fetch_data_button'])
 
 
 def show_table_details(event):
@@ -472,9 +513,15 @@ submit_button.on_click(insert_data)
 
 fetch_data_button.on_click(fetch_data)
 
-button_italian = pn.widgets.Button(name="IT")
-button_english = pn.widgets.Button(name="EN")
-button_spanish = pn.widgets.Button(name="ES")
+
+it_svg = """<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" version="1"><g fill="none" fill-rule="evenodd"><path fill="#499348" d="M0 0h128v128H0z"/><path fill="#CF3737" d="M128 0v128H0L128 0z"/><text fill="#FFFFFF" font-family="Arial" font-size="64"><tspan x="35" y="85">IT</tspan></text></g></svg>"""
+en_svg = """<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" version="1"><g fill="none" fill-rule="evenodd"><path fill="#3B3B6D" d="M0 0h128v128H0z"/><path fill="#B42F34" d="M128 0v128H0L128 0z"/><text fill="#FFFFFF" font-family="Arial" font-size="64"><tspan x="19" y="85">EN</tspan></text></g></svg>"""
+es_svg = """<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" version="1"><g fill="none" fill-rule="evenodd"><path fill="#F8C433" d="M0 0h128v128H0z"/><path fill="#DE3B30" d="M128 38v89l-1 1H38l90-90z"/><path fill="#DE3B30" d="M1 0h89L0 90V1l1-1z"/><text fill="#FFFFFF" font-family="Arial" font-size="64"><tspan x="21" y="85">ES</tspan></text></g></svg>"""
+
+
+button_italian = pn.widgets.Button(name="IT", icon=it_svg, width=50, height=50)
+button_english = pn.widgets.Button(name="EN", icon=en_svg, width=50, height=50)
+button_spanish = pn.widgets.Button(name="ES", icon=es_svg, width=50, height=50)
 
 modal_0_content = pn.Row(pn.pane.HTML(widget_labels['modal_0_content']))
 modal_1_content = pn.Row(pn.pane.HTML(widget_labels['modal_1_content']))
@@ -547,6 +594,11 @@ def change_widget_labels(lang='en'):
     modal_2_content.object= widget_labels['modal_2_content']
     modal_3_content.object= widget_labels['modal_3_content']
     modal_4_content.object= widget_labels['modal_4_content']
+    add_row.name=widget_labels['add_row']
+    remove_row.name=widget_labels['remove_row']
+    show_details.name=widget_labels['show_details']
+    submit_button.name=widget_labels['submit_button']
+    fetch_data_button.name=widget_labels['fetch_data_button']
 
 
 def on_button_italian_clicked(_):
@@ -579,6 +631,8 @@ button_spanish.on_click(on_button_spanish_clicked)
 
 translate_buttons = pn.Row(button_italian, button_english, button_spanish)
 
+results_log_pane = pn.pane.HTML("""""")
+
 partecipation_form = pn.Column(default_separator, 
                                partecipation, 
                                optional_separator, 
@@ -587,6 +641,7 @@ partecipation_form = pn.Column(default_separator,
                                pn.Row(add_row, 
                                       remove_row, show_details, submit_button), 
                                fetch_data_button,
+                               results_log_pane,
                                pn.Spacer(height=20),
                                foot_note_1_description,
                                foot_note_2_description,
@@ -607,7 +662,6 @@ black_jack_description_pane = pn.pane.HTML(black_jack_description, styles=styles
 location_description_pane = pn.GridBox(*[retiro_description_pane,
              restaurant_description_pane, casa_sposi_description_pane, black_jack_description_pane], ncols=1)
 
-
 tabs = pn.Tabs((' Intro ', html_intro_pane), 
                (' Form ', partecipation_form), 
                (' Map ', pn.Column(pn.Column(leafmap), 
@@ -621,7 +675,7 @@ init_pg_db(table_name)
 
 # widgets = pn.Column(f"Congrats `{pn.state.user}` You got access!")
 
-widgets = pn.Column(pn.Column(pn.Row(translate_buttons, logout), tabs))
+widgets = pn.Column(pn.Row(translate_buttons), tabs, logout)
 
 app = pn.template.FastListTemplate(
     site="♥", title="Geno & Massi Sposi!",
@@ -632,5 +686,11 @@ app = pn.template.FastListTemplate(
 app.modal.append(pn.Column())
 app.modal[0].clear()
 # app.modal[0].append(modal_1_content)
+
+app.header.append(
+    logout
+)
+
+
 app.servable()
 
