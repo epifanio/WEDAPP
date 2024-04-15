@@ -12,6 +12,8 @@ from datetime import datetime as dt
 from jinja2 import Environment, FileSystemLoader
 
 from translator import intro_text, default_separator_text, optional_separator_text, html_donation_text, change_widget_labels_text
+from svg_icon import it_svg, en_svg, es_svg, heart_svg
+import base64
 
 
 from hv_css import raw_css
@@ -21,6 +23,7 @@ from hv_css import raw_css
 #template="fast"
 
 pn.extension('tabulator', raw_css=[raw_css])
+pn.config.css_files.append("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
 
 # env = Environment(loader=FileSystemLoader('/app/static'))
 
@@ -52,16 +55,16 @@ full_table.value = True
 
 session_started = dt.now()
 
-html_intro_pane = pn.pane.HTML(intro_text(lang='en'), styles=styles, sizing_mode="stretch_both")
+html_intro_pane = pn.pane.HTML(intro_text(lang='en'), styles=styles, sizing_mode="stretch_width")
 
 name_label = pn.pane.HTML(widget_labels['name_label'], width=75)
-name = pn.widgets.TextInput(name='', placeholder='...')
+name = pn.widgets.TextInput(name='', placeholder='...', sizing_mode="stretch_width")
 
 surname_label = pn.pane.HTML(widget_labels['surname_label'], width=75)
-surname = pn.widgets.TextInput(name='', placeholder='...')
+surname = pn.widgets.TextInput(name='', placeholder='...', sizing_mode="stretch_width")
 
 age_options_label = pn.pane.HTML(widget_labels['age_options_label'], width=75)
-age_options = pn.widgets.Select(name='', options=['< 4', '4 - 8', '9 - 12', '> 12'], description='Age')
+age_options = pn.widgets.Select(name='', options=['< 4', '4 - 8', '9 - 12', '> 12'], description='Age', width=75)
 
 cerimony = pn.widgets.Checkbox(name=widget_labels['cerimony']) 
 
@@ -70,7 +73,7 @@ banquet = pn.widgets.Checkbox(name=widget_labels['banquet'])
 food_restrictions = pn.widgets.Checkbox(name=widget_labels['food_restrictions'])
 
 food_restrictions_details_label = pn.pane.HTML(widget_labels['food_restrictions_details_label'], visible=False)
-food_restrictions_details = pn.widgets.Select(name='', options=['No', 'Vegetarian', 'Vegan', 'No Fish', 'No pork'],  visible=False)
+food_restrictions_details = pn.widgets.Select(name='', options=['No', 'Vegetarian', 'Vegan', 'No Fish', 'No pork'],  visible=False, width=100)
 
 allergy = pn.widgets.Checkbox(name=widget_labels['allergy'])
 allergy_details_label = pn.pane.HTML(widget_labels['allergy_details_label'], visible=False)
@@ -190,7 +193,11 @@ def fetch_data(event):
     column_names = list(recent_df.columns)
     dft = recent_df.transpose()
     dft.insert(0, 'Fields', column_names)
-    results_log_pane.object =dft.to_html(index=False)
+    # results_log_pane.object = dft.to_html(index=False)
+    app.modal[0].clear()
+    modal_4_content = pn.Row(pn.pane.HTML(dft.to_html(index=False)), sizing_mode='stretch_width')
+    app.modal[0].append(modal_4_content)
+    app.open_modal()
 
     
 
@@ -242,11 +249,11 @@ party = pn.widgets.Checkbox(name=widget_labels['party']) # (Note, adult only!)
 partecipation = pn.Column(pn.Row(name_label, name), 
                     pn.Row(surname_label, surname), 
                     pn.Row(age_options_label, age_options), 
-                    pn.Row(cerimony, foot_note_1), 
+                    cerimony, 
                     banquet,
                     pn.Column(food_restrictions, pn.Row(pn.Spacer(width=100), food_restrictions_details_label, food_restrictions_details)), 
                     pn.Column(allergy, pn.Row(pn.Spacer(width=100), pn.Column(allergy_details_label, allergy_details))), 
-                    pn.Row(party, foot_note_2))
+                    party)
 
 lunch = pn.widgets.Checkbox(name = widget_labels['lunch']) # (restaurant TBD, own expense!)
 dinner = pn.widgets.Checkbox(name = widget_labels['dinner']) # (restaurant TBD, own expense!)
@@ -281,9 +288,13 @@ def show_accomodation_details(event):
 
 hotel.param.watch(show_accomodation_details, 'value')
 
-default_separator = pn.pane.HTML(default_separator_text(lang='en'), width=600)
+# default_separator = pn.pane.HTML(default_separator_text(lang='en'), width=600)
 
-optional_separator = pn.pane.HTML(optional_separator_text(lang='en'), width=600)
+# optional_separator = pn.pane.HTML(optional_separator_text(lang='en'), width=600)
+
+default_separator = pn.pane.HTML(default_separator_text(lang='en'), sizing_mode='stretch_width')
+
+optional_separator = pn.pane.HTML(optional_separator_text(lang='en'), sizing_mode='stretch_width')
 
 extra = pn.Column(pn.Row(lunch, foot_note_3), 
                   pn.Row(dinner, foot_note_3), 
@@ -372,7 +383,7 @@ df = pd.DataFrame({
         'User_id': [],
 }, index=[])
 
-df_widget = pn.widgets.Tabulator(df, formatters=bokeh_formatters)
+df_widget = pn.widgets.Tabulator(df, formatters=bokeh_formatters, sizing_mode='stretch_width')
 
 df_widget.hidden_columns = ['index', 
                             'Session', 
@@ -396,13 +407,17 @@ df_widget.hidden_columns = ['index',
 
 
 
-add_row = pn.widgets.Button(name=widget_labels['add_row'], button_type='success')
+# add_row = pn.widgets.Button(name=widget_labels['add_row'], button_type='success')
+add_row = pn.widgets.Button(icon="square-rounded-plus", description=widget_labels['add_row'] , icon_size='2em' , button_type='success')
 
-remove_row = pn.widgets.Button(name=widget_labels['remove_row'], button_type='danger')
+#remove_row = pn.widgets.Button(name=widget_labels['remove_row'], button_type='danger')
+remove_row = pn.widgets.Button(icon='square-rounded-x', description=widget_labels['remove_row'], icon_size='2em', button_type='danger')
 
-show_details = pn.widgets.Button(name=widget_labels['show_details'], button_type='warning')
+# show_details = pn.widgets.Button(name=widget_labels['show_details'], button_type='warning')
+show_details = pn.widgets.Button(icon='square-rounded-chevrons-right', icon_size='1em', button_type='warning')
 
 submit_button = pn.widgets.Button(name=widget_labels['submit_button'], button_type='primary')
+submit_button = pn.widgets.Button(icon='square-rounded-check', description=widget_labels['submit_button'],  icon_size='2em',  button_type='primary')
 
 fetch_data_button = pn.widgets.Button(name=widget_labels['fetch_data_button'])
 
@@ -412,6 +427,7 @@ def show_table_details(event):
     if full_table.value:
         df_widget.hidden_columns = ['index', 'Session', 'User_id']
         full_table.value = False
+        show_details.icon = 'square-rounded-chevrons-left'
     else: 
         df_widget.hidden_columns = ['index', 
                                     'Session', 
@@ -432,6 +448,7 @@ def show_table_details(event):
                                     'Guest',
                                     'Session']
         full_table.value = True
+        show_details.icon = 'square-rounded-chevrons-right'
     print('meta_viewport: ', app.meta_viewport)
 
 
@@ -514,14 +531,9 @@ submit_button.on_click(insert_data)
 fetch_data_button.on_click(fetch_data)
 
 
-it_svg = """<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" version="1"><g fill="none" fill-rule="evenodd"><path fill="#499348" d="M0 0h128v128H0z"/><path fill="#CF3737" d="M128 0v128H0L128 0z"/><text fill="#FFFFFF" font-family="Arial" font-size="64"><tspan x="35" y="85">IT</tspan></text></g></svg>"""
-en_svg = """<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" version="1"><g fill="none" fill-rule="evenodd"><path fill="#3B3B6D" d="M0 0h128v128H0z"/><path fill="#B42F34" d="M128 0v128H0L128 0z"/><text fill="#FFFFFF" font-family="Arial" font-size="64"><tspan x="19" y="85">EN</tspan></text></g></svg>"""
-es_svg = """<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" version="1"><g fill="none" fill-rule="evenodd"><path fill="#F8C433" d="M0 0h128v128H0z"/><path fill="#DE3B30" d="M128 38v89l-1 1H38l90-90z"/><path fill="#DE3B30" d="M1 0h89L0 90V1l1-1z"/><text fill="#FFFFFF" font-family="Arial" font-size="64"><tspan x="21" y="85">ES</tspan></text></g></svg>"""
-
-
-button_italian = pn.widgets.Button(name="IT", icon=it_svg, width=50, height=50)
-button_english = pn.widgets.Button(name="EN", icon=en_svg, width=50, height=50)
-button_spanish = pn.widgets.Button(name="ES", icon=es_svg, width=50, height=50)
+button_italian = pn.widgets.Button(icon=it_svg, icon_size='2em')
+button_english = pn.widgets.Button(icon=en_svg, icon_size='2em')
+button_spanish = pn.widgets.Button(icon=es_svg, icon_size='2em')
 
 modal_0_content = pn.Row(pn.pane.HTML(widget_labels['modal_0_content']))
 modal_1_content = pn.Row(pn.pane.HTML(widget_labels['modal_1_content']))
@@ -594,10 +606,14 @@ def change_widget_labels(lang='en'):
     modal_2_content.object= widget_labels['modal_2_content']
     modal_3_content.object= widget_labels['modal_3_content']
     modal_4_content.object= widget_labels['modal_4_content']
-    add_row.name=widget_labels['add_row']
-    remove_row.name=widget_labels['remove_row']
-    show_details.name=widget_labels['show_details']
-    submit_button.name=widget_labels['submit_button']
+    # add_row.name=widget_labels['add_row']
+    add_row.description=widget_labels['add_row']
+    # remove_row.name=widget_labels['remove_row']
+    remove_row.description=widget_labels['remove_row']
+    # show_details.name=widget_labels['show_details']
+    show_details.description=widget_labels['show_details']
+    # submit_button.name=widget_labels['submit_button']
+    submit_button.description=widget_labels['submit_button']
     fetch_data_button.name=widget_labels['fetch_data_button']
 
 
@@ -631,15 +647,16 @@ button_spanish.on_click(on_button_spanish_clicked)
 
 translate_buttons = pn.Row(button_italian, button_english, button_spanish)
 
-results_log_pane = pn.pane.HTML("""""")
+results_log_pane = pn.pane.HTML(""" """, visible=False)
 
 partecipation_form = pn.Column(default_separator, 
                                partecipation, 
                                optional_separator, 
                                extra, 
-                               df_widget, 
+                               pn.Row(show_details, df_widget, sizing_mode='stretch_both'), 
                                pn.Row(add_row, 
-                                      remove_row, show_details, submit_button), 
+                                      remove_row, 
+                                      submit_button), 
                                fetch_data_button,
                                results_log_pane,
                                pn.Spacer(height=20),
@@ -653,21 +670,33 @@ html_donation_pane = pn.pane.HTML(html_donation_text(lang='en'), styles=styles)
 
 retiro_description, restaurant_description, casa_sposi_description, black_jack_description = location_description(lang='en')
 
-retiro_description_pane = pn.pane.HTML(retiro_description, styles=styles, width=525)
+# retiro_description_pane = pn.pane.HTML(retiro_description, styles=styles, width=525)
+# restaurant_description_pane = pn.pane.HTML(restaurant_description, styles=styles, width=525) 
+# casa_sposi_description_pane = pn.pane.HTML(casa_sposi_description, styles=styles, width=525)
+# black_jack_description_pane = pn.pane.HTML(black_jack_description, styles=styles, width=525)
 
-restaurant_description_pane = pn.pane.HTML(restaurant_description, styles=styles, width=525) 
-casa_sposi_description_pane = pn.pane.HTML(casa_sposi_description, styles=styles, width=525)
-black_jack_description_pane = pn.pane.HTML(black_jack_description, styles=styles, width=525)
+retiro_description_pane = pn.pane.HTML(retiro_description, styles=styles, sizing_mode='stretch_both')
+restaurant_description_pane = pn.pane.HTML(restaurant_description, styles=styles, sizing_mode='stretch_both') 
+casa_sposi_description_pane = pn.pane.HTML(casa_sposi_description, styles=styles, sizing_mode='stretch_both')
+black_jack_description_pane = pn.pane.HTML(black_jack_description, styles=styles, sizing_mode='stretch_both')
 
-location_description_pane = pn.GridBox(*[retiro_description_pane,
-             restaurant_description_pane, casa_sposi_description_pane, black_jack_description_pane], ncols=1)
+# location_description_pane = pn.GridBox(*[retiro_description_pane,
+#              restaurant_description_pane, casa_sposi_description_pane, black_jack_description_pane], ncols=1, sizing_mode='stretch_both')
+
+location_description_pane = pn.Column(retiro_description_pane, 
+                                   restaurant_description_pane, 
+                                   casa_sposi_description_pane, 
+                                   black_jack_description_pane,
+                                   sizing_mode='stretch_both')
+
+
 
 tabs = pn.Tabs((' Intro ', html_intro_pane), 
                (' Form ', partecipation_form), 
-               (' Map ', pn.Column(pn.Column(leafmap), 
+               (' Map ', pn.Column(pn.Column(leafmap, sizing_mode='stretch_both'), 
                                  pn.pane.HTML("""<p style="font-family:'Courier New'; font-size:25px;"><b>Locations</b></p>"""), 
                                  location_description_pane, sizing_mode='stretch_both')),
-               (' Bank details ', html_donation_pane), dynamic=True)
+               (' Bank details ', html_donation_pane), dynamic=False)
 
 df_widget.disabled = True
 
@@ -675,13 +704,26 @@ init_pg_db(table_name)
 
 # widgets = pn.Column(f"Congrats `{pn.state.user}` You got access!")
 
-widgets = pn.Column(pn.Row(translate_buttons), tabs, logout)
+widgets = pn.Column(pn.Row(translate_buttons), tabs)
+
+# LOGO
+logo_filepath = os.path.join(os.getcwd(), '/app/static', 'favicon.png')
+binary_fc  = open(logo_filepath, 'rb').read()  # fc aka file_content
+base64_utf8_str = base64.b64encode(binary_fc).decode('utf-8')
+ext     = logo_filepath.split('.')[-1]
+dataurl = f'data:image/{ext};base64,{base64_utf8_str}'
 
 app = pn.template.FastListTemplate(
-    site="♥", title="Geno & Massi Sposi!",
+    # site="♥", 
+    title="Geno & Massi Sposi!",
+    logo = dataurl,
+    favicon = os.path.join(os.getcwd(), '/app/static', 'favicon.png'),
     main=[widgets],
     meta_viewport = "width=device-width,minimum-scale=1,initial-scale=1"
 )
+
+
+
 
 app.modal.append(pn.Column())
 app.modal[0].clear()
