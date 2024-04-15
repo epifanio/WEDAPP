@@ -446,7 +446,8 @@ def show_table_details(event):
                                     'Room details',
                                     'Days',
                                     'Guest',
-                                    'Session']
+                                    'Session',
+                                    'User_id']
         full_table.value = True
         show_details.icon = 'square-rounded-chevrons-right'
     print('meta_viewport: ', app.meta_viewport)
