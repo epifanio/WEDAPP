@@ -7,7 +7,7 @@ import panel as pn
 def getMap():
     # Create a Map
     m = Map(center=(40.43817, -3.68661), zoom=12)
-    
+    m.layout.width = '100%'
     # Define marker positions
     positions = [
         (40.41874, -3.70753),  # Party
