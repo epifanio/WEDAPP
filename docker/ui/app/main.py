@@ -12,11 +12,12 @@ from datetime import datetime as dt
 from jinja2 import Environment, FileSystemLoader
 
 from translator import intro_text, default_separator_text, optional_separator_text, html_donation_text, change_widget_labels_text
-from svg_icon import it_svg, en_svg, es_svg, heart_svg
+from svg_icon import it_svg, en_svg, es_svg, heart_svg, log_out_svg, submit_svg, add_svg, remove_svg, user_info_svg, maximize_svg, minimize_svg
 import base64
 
-
 from hv_css import raw_css
+
+ACCENT_COLOR = "#0072B5"
 
 # import json
 
@@ -27,7 +28,7 @@ pn.config.css_files.append("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/
 
 # env = Environment(loader=FileSystemLoader('/app/static'))
 
-logout = pn.widgets.Button(name="Log out", button_type='danger')
+logout = pn.widgets.Button(description="Log out", icon=log_out_svg,  button_type='danger', icon_size='1.4em', height=30)
 logout.js_on_click(code="""window.location.href = './logout'""")
 
 
@@ -193,10 +194,20 @@ def fetch_data(event):
     column_names = list(recent_df.columns)
     dft = recent_df.transpose()
     dft.insert(0, 'Fields', column_names)
+    results_widget = pn.widgets.Tabulator(dft, sizing_mode='stretch_width')
+    results_widget.hidden_columns = ['index']
     # results_log_pane.object = dft.to_html(index=False)
     app.modal[0].clear()
-    modal_4_content = pn.Row(pn.pane.HTML(dft.to_html(index=False)), sizing_mode='stretch_width')
+    # modal_4_content = pn.Row(pn.pane.HTML(dft.to_html(index=False)), sizing_mode='stretch_width')
+    results_widget.disabled = True
+    modal_4_content = pn.Row(results_widget, sizing_mode='stretch_width')
+    app.modal[0].append(pn.pane.HTML(f"<b>Data found for user: {pn.state.user}"))
+    #  {recent_df['Full name'].values[0]}</b> <br> with ID:
+    # I can use the id to retrieve more info about the user
+    # I can use this dialog to ask them to confirm their data or
+    # to ask them to update their data etc ..
     app.modal[0].append(modal_4_content)
+    
     app.open_modal()
 
     
@@ -383,6 +394,8 @@ df = pd.DataFrame({
         'User_id': [],
 }, index=[])
 
+
+
 df_widget = pn.widgets.Tabulator(df, formatters=bokeh_formatters, sizing_mode='stretch_width')
 
 df_widget.hidden_columns = ['index', 
@@ -408,18 +421,18 @@ df_widget.hidden_columns = ['index',
 
 
 # add_row = pn.widgets.Button(name=widget_labels['add_row'], button_type='success')
-add_row = pn.widgets.Button(icon="square-rounded-plus", description=widget_labels['add_row'] , icon_size='2em' , button_type='success')
+add_row = pn.widgets.Button(icon=add_svg, description=widget_labels['add_row'] , icon_size='2em' , button_type='success')
 
 #remove_row = pn.widgets.Button(name=widget_labels['remove_row'], button_type='danger')
-remove_row = pn.widgets.Button(icon='square-rounded-x', description=widget_labels['remove_row'], icon_size='2em', button_type='danger')
+remove_row = pn.widgets.Button(icon=remove_svg, description=widget_labels['remove_row'], icon_size='2em', button_type='danger')
 
 # show_details = pn.widgets.Button(name=widget_labels['show_details'], button_type='warning')
-show_details = pn.widgets.Button(icon='square-rounded-chevrons-right', icon_size='1em', button_type='warning')
+show_details = pn.widgets.Button(icon=maximize_svg, description=widget_labels['show_details'], icon_size='1em', button_type='warning')
 
 submit_button = pn.widgets.Button(name=widget_labels['submit_button'], button_type='primary')
-submit_button = pn.widgets.Button(icon='square-rounded-check', description=widget_labels['submit_button'],  icon_size='2em',  button_type='primary')
+submit_button = pn.widgets.Button(icon=submit_svg, description=widget_labels['submit_button'],  icon_size='2em',  button_type='primary')
 
-fetch_data_button = pn.widgets.Button(name=widget_labels['fetch_data_button'])
+fetch_data_button = pn.widgets.Button(icon=user_info_svg, description=widget_labels['fetch_data_button'], icon_size='2em',  button_type='warning')
 
 
 def show_table_details(event):
@@ -427,7 +440,7 @@ def show_table_details(event):
     if full_table.value:
         df_widget.hidden_columns = ['index', 'Session', 'User_id']
         full_table.value = False
-        show_details.icon = 'square-rounded-chevrons-left'
+        show_details.icon = minimize_svg
     else: 
         df_widget.hidden_columns = ['index', 
                                     'Session', 
@@ -449,7 +462,7 @@ def show_table_details(event):
                                     'Session',
                                     'User_id']
         full_table.value = True
-        show_details.icon = 'square-rounded-chevrons-right'
+        show_details.icon = maximize_svg
     print('meta_viewport: ', app.meta_viewport)
 
 
@@ -608,14 +621,14 @@ def change_widget_labels(lang='en'):
     modal_3_content.object= widget_labels['modal_3_content']
     modal_4_content.object= widget_labels['modal_4_content']
     # add_row.name=widget_labels['add_row']
-    add_row.description=widget_labels['add_row']
+    add_row.description = widget_labels['add_row']
     # remove_row.name=widget_labels['remove_row']
-    remove_row.description=widget_labels['remove_row']
+    remove_row.description = widget_labels['remove_row']
     # show_details.name=widget_labels['show_details']
-    show_details.description=widget_labels['show_details']
+    show_details.description = widget_labels['show_details']
     # submit_button.name=widget_labels['submit_button']
-    submit_button.description=widget_labels['submit_button']
-    fetch_data_button.name=widget_labels['fetch_data_button']
+    submit_button.description = widget_labels['submit_button']
+    fetch_data_button.description = widget_labels['fetch_data_button']
 
 
 def on_button_italian_clicked(_):
@@ -640,6 +653,7 @@ def on_button_spanish_clicked(_):
     html_donation_pane.object = html_donation_text(lang='es')
     default_separator.object = default_separator_text(lang='es')
     optional_separator.object = optional_separator_text(lang='es')
+    
 
 
 button_italian.on_click(on_button_italian_clicked)
@@ -657,8 +671,7 @@ partecipation_form = pn.Column(default_separator,
                                pn.Row(show_details, df_widget, sizing_mode='stretch_both'), 
                                pn.Row(add_row, 
                                       remove_row, 
-                                      submit_button), 
-                               fetch_data_button,
+                                      submit_button, fetch_data_button),
                                results_log_pane,
                                pn.Spacer(height=20),
                                foot_note_1_description,
@@ -714,13 +727,17 @@ base64_utf8_str = base64.b64encode(binary_fc).decode('utf-8')
 ext     = logo_filepath.split('.')[-1]
 dataurl = f'data:image/{ext};base64,{base64_utf8_str}'
 
+
 app = pn.template.FastListTemplate(
     # site="♥", 
-    title="Geno & Massi Sposi!",
+    # title="Geno & Massi Sposi!",
+    title="G ♥ M",
+    header = logout,
     logo = dataurl,
     favicon = os.path.join(os.getcwd(), '/app/static', 'favicon.png'),
     main=[widgets],
-    meta_viewport = "width=device-width,minimum-scale=1,initial-scale=1"
+    meta_viewport = "width=device-width,minimum-scale=1,initial-scale=1",
+    accent_base_color=ACCENT_COLOR, header_background=ACCENT_COLOR,
 )
 
 
@@ -730,9 +747,9 @@ app.modal.append(pn.Column())
 app.modal[0].clear()
 # app.modal[0].append(modal_1_content)
 
-app.header.append(
-    logout
-)
+# app.header.append(
+#     logout
+# )
 
 
 app.servable()
