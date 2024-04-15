@@ -33,7 +33,7 @@ def intro_text(lang='en'):
         <br>
         <br>
         <br></p>
-        P.S.: Please, fill in the form by June 1st!"""
+        <p style="font-family:'Courier New'; font-size:15px;"><b><font color='red'> P.S.: <br> Please, fill in the form by June 1st! </b></p>"""
     if lang == 'es':
         text = """  <center> <h1>Nos casamos, y queremos celebrarlo CONTIGO!</h1></center> 
         <br>
@@ -67,7 +67,7 @@ def intro_text(lang='en'):
         <br>
         <br>
         <br></p>
-        PD: Por favor, mandadnos las respuestas del formulario antes del 1 de junio!"""
+        <p style="font-family:'Courier New'; font-size:15px;"><b><font color='red'> P.S.: <br> Por favor, mandadnos las respuestas del formulario antes del 1 de junio! </b></p>"""
     if lang == 'it':
         text = """  <center> <h1>Ci sposiamo e ci piacerebbe festeggiarlo con VOI!</h1></center> 
         <br>
@@ -101,7 +101,7 @@ def intro_text(lang='en'):
         <br>
         <br>
         <br></p>
-        P.S.: Ti preghiamo di inviarci le risposte al modulo prima del 1° giugno!"""
+        <p style="font-family:'Courier New'; font-size:15px;"><b><font color='red'> P.S.: <br> Ti preghiamo di inviarci le risposte al modulo prima del 1° giugno! </b></p>"""
     return text
 
 def default_separator_text(lang='en'):
@@ -208,9 +208,9 @@ def change_widget_labels_text(lang='en'):
         widget_labels['room_label'] = "Room Type"
         widget_labels['date_range_picker_label'] = "Arrival and Departure Date"
         widget_labels['number_guest_label'] = "Number of Guests"
-        widget_labels['foot_note_1_description'] = "<b><font color='red'>*: Attention! Capacity is limited! We greatly appreciate if you prioritize those coming from outside Madrid :-)</b>"
-        widget_labels['foot_note_2_description'] = "<b><font color='red'>**: Attention! By this time, the little ones should already be in bed, so only adults can attend this part of the event!</b>"
-        widget_labels['foot_note_3_description'] = "<b><font color='red'>***: On my own, at a restaurant yet to be decided!</b>"
+        widget_labels['foot_note_1_description'] = """<p style="font-family:'Courier New'; font-size:15px;"><b><font color='red'>*: Attention! Capacity is limited! <br> We greatly appreciate if you prioritize those coming from outside Madrid :-)</b>"""
+        widget_labels['foot_note_2_description'] = """<p style="font-family:'Courier New'; font-size:15px;"><b><font color='red'>**: Attention! By this time, the little ones should already be in bed, <br> so only adults can attend this part of the event!</b>"""
+        widget_labels['foot_note_3_description'] = """<p style="font-family:'Courier New'; font-size:15px;"><b><font color='red'>***: On my own, at a restaurant yet to be decided!</b>"""
         retiro_description_pane, restaurant_description_pane, casa_sposi_description_pane, black_jack_description_pane = location_description(lang='en')
         widget_labels['retiro_description_pane'] = retiro_description_pane
         widget_labels['restaurant_description_pane'] = restaurant_description_pane
@@ -220,7 +220,7 @@ def change_widget_labels_text(lang='en'):
         widget_labels['remove_row'] = 'Remove Selected Record'
         widget_labels['show_details'] = 'Show Table Details'
         widget_labels['submit_button'] = 'Submit Table'
-        widget_labels['fetch_data_button'] = 'Fetch Data'
+        widget_labels['fetch_data_button'] = 'Check Your Data'
         widget_labels['modal_0_content'] = """<p style="font-family:'Courier New';"><b>Sorry, Can't add a record. Please check that you have provided an answer for the mandatory fields! <br> ['Name', 'Surname']</b></p>"""
         widget_labels['modal_1_content'] = """<p style="font-family:'Courier New';"><b>Can't submit empty Table! First add some records, and do not forget to fill the mandatory fields! <br> ['Name', 'Surname']</b></p>"""
         widget_labels['modal_2_content'] = """<p style="font-family:'Courier New';"><b>Record inserted successfully!</b></p>"""
@@ -245,9 +245,9 @@ def change_widget_labels_text(lang='en'):
         widget_labels['room_label'] = "Tipo di Camera"
         widget_labels['date_range_picker_label'] = "Data di Arrivo e Partenza"
         widget_labels['number_guest_label'] = "Numero di Ospiti"
-        widget_labels['foot_note_1_description'] = "<b><font color='red'>*: Attenzione! La capacità è limitata! Apprezziamo molto se dai priorità a chi viene da fuori Madrid :-)</b>"
-        widget_labels['foot_note_2_description'] = "<b><font color='red'>**: Attenzione! A quest'ora i più piccoli dovrebbero già essere a letto, quindi solo gli adulti possono partecipare a questa parte dell'evento!</b>"
-        widget_labels['foot_note_3_description'] = "<b><font color='red'>***: Da solo, in un ristorante ancora da decidere!</b>"
+        widget_labels['foot_note_1_description'] = """<p style="font-family:'Courier New'; font-size:15px;"><b><font color='red'>*: Attenzione! La capacità è limitata! <br> Apprezziamo molto se dai priorità a chi viene da fuori Madrid :-)</b>"""
+        widget_labels['foot_note_2_description'] = """<p style="font-family:'Courier New'; font-size:15px;"><b><font color='red'>**: Attenzione! A quest'ora i più piccoli dovrebbero già essere a letto, <br> quindi solo gli adulti possono partecipare a questa parte dell'evento!</b>"""
+        widget_labels['foot_note_3_description'] = """<p style="font-family:'Courier New'; font-size:15px;"><b><font color='red'>***: Da solo, in un ristorante ancora da decidere!</b>"""
         retiro_description_pane, restaurant_description_pane, casa_sposi_description_pane, black_jack_description_pane = location_description(lang='it')
         widget_labels['retiro_description_pane'] = retiro_description_pane
         widget_labels['restaurant_description_pane'] = restaurant_description_pane
@@ -282,19 +282,19 @@ def change_widget_labels_text(lang='en'):
         widget_labels['room_label'] = "Tipo de habitación"
         widget_labels['date_range_picker_label'] = "Dia de llegada y partida"
         widget_labels['number_guest_label'] = "Número de huéspedes"
-        widget_labels['foot_note_1_description'] = "<b><font color='red'>*: Atención! El aforo es limitado! Os agradecemos infinito si le dáis prioridad a los que vienen de fuera de Madrid :-)</b>"
-        widget_labels['foot_note_2_description'] = "<b><font color='red'>**: Atención! A estas horas los peques ya tienen que estar en la cama, así que a esta parte del evento solo podrán asistir los mayores!</b>"
-        widget_labels['foot_note_3_description'] = "<b><font color='red'>***: Por cuenta propia, en un restaurante aún por decidir!</b>"
+        widget_labels['foot_note_1_description'] = """<p style="font-family:'Courier New'; font-size:15px;"> <b><font color='red'>*: Atención! El aforo es limitado! <br> Os agradecemos infinito si le dáis prioridad a los que vienen de fuera de Madrid :-)</b></p>"""
+        widget_labels['foot_note_2_description'] = """<p style="font-family:'Courier New'; font-size:15px;"> <b><font color='red'>**: Atención! A estas horas los peques ya tienen que estar en la cama, <br> así que a esta parte del evento solo podrán asistir los mayores!</b>"""
+        widget_labels['foot_note_3_description'] = """<p style="font-family:'Courier New'; font-size:15px;"><b><font color='red'>***: Por cuenta propia, en un restaurante aún por decidir!</b>"""
         retiro_description_pane, restaurant_description_pane, casa_sposi_description_pane, black_jack_description_pane = location_description(lang='es')
         widget_labels['retiro_description_pane'] = retiro_description_pane
         widget_labels['restaurant_description_pane'] = restaurant_description_pane
         widget_labels['casa_sposi_description_pane'] = casa_sposi_description_pane
         widget_labels['black_jack_description_pane'] = black_jack_description_pane
-        widget_labels['add_row'] = 'Add New Line'
-        widget_labels['remove_row'] = 'Remove Selected Line'
-        widget_labels['show_details'] = 'Show Table Details'
-        widget_labels['submit_button'] = 'Submit Table'
-        widget_labels['fetch_data_button'] = 'Fetch Data'
+        widget_labels['add_row'] = 'Agregar nueva línea'
+        widget_labels['remove_row'] = 'Eliminar línea seleccionada'
+        widget_labels['show_details'] = 'Mostrar detalles de la tabla'
+        widget_labels['submit_button'] = 'Enviar tabla'
+        widget_labels['fetch_data_button'] = 'Comprueba tus datos'
         widget_labels['modal_0_content'] = "Lo siento, no puedo agregar un registro. ¡Por favor, verifica que has proporcionado una respuesta para los campos obligatorios! <br> ['Nombre', 'Apellidos']"
         widget_labels['modal_1_content'] = "¡No puedo enviar una tabla vacía! ¡Primero agrega algunos registros, y no olvides completar los campos obligatorios! <br> ['Nombre', 'Apellidos']"
         widget_labels['modal_2_content'] = "¡Registro insertado con éxito!"
