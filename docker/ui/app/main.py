@@ -615,6 +615,7 @@ def change_widget_labels(lang='en'):
     restaurant_description_pane.object = widget_labels['restaurant_description_pane']
     casa_sposi_description_pane.object = widget_labels['casa_sposi_description_pane']
     black_jack_description_pane.object = widget_labels['black_jack_description_pane']
+    pit_stop_description_pane.object = widget_labels['pit_stop_description_pane']
     modal_0_content.object= widget_labels['modal_0_content']
     modal_1_content.object= widget_labels['modal_1_content']
     modal_2_content.object= widget_labels['modal_2_content']
@@ -682,7 +683,7 @@ leafmap = getMap()
 
 html_donation_pane = pn.pane.HTML(html_donation_text(lang='en'), styles=styles)
 
-retiro_description, restaurant_description, casa_sposi_description, black_jack_description = location_description(lang='en')
+retiro_description, restaurant_description, casa_sposi_description, black_jack_description, pit_stop_description = location_description(lang='en')
 
 # retiro_description_pane = pn.pane.HTML(retiro_description, styles=styles, width=525)
 # restaurant_description_pane = pn.pane.HTML(restaurant_description, styles=styles, width=525) 
@@ -693,6 +694,8 @@ retiro_description_pane = pn.pane.HTML(retiro_description, styles=styles, sizing
 restaurant_description_pane = pn.pane.HTML(restaurant_description, styles=styles, sizing_mode='stretch_both') 
 casa_sposi_description_pane = pn.pane.HTML(casa_sposi_description, styles=styles, sizing_mode='stretch_both')
 black_jack_description_pane = pn.pane.HTML(black_jack_description, styles=styles, sizing_mode='stretch_both')
+pit_stop_description_pane = pn.pane.HTML(pit_stop_description, styles=styles, sizing_mode='stretch_both')
+
 
 # location_description_pane = pn.GridBox(*[retiro_description_pane,
 #              restaurant_description_pane, casa_sposi_description_pane, black_jack_description_pane], ncols=1, sizing_mode='stretch_both')
@@ -701,6 +704,7 @@ location_description_pane = pn.Column(retiro_description_pane,
                                    restaurant_description_pane, 
                                    casa_sposi_description_pane, 
                                    black_jack_description_pane,
+                                   pit_stop_description_pane,
                                    sizing_mode='stretch_both')
 
 

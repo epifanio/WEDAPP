@@ -2,31 +2,28 @@ from wed_map import location_description
 
 def intro_text(lang='en'):
     if lang == 'en':
-        text = """<center> <h1>We're Getting Married, and would like to Celebrate with YOU!</h1></center> 
+        text = """  <center> <h1>WE’RE FINALLY GETTING MARRIED!!!</h1></center> 
         <br>
         <br>
-        <p style="font-family:'Courier New';"> Here is what you need to know, in a nutshell:
+        <p style="font-family:'Courier New';">To celebrate, we have arranged a touristic, 
+        gastronomic wedding crawl that we hope you’ll enjoy. 
+        These are the main stops:<br>
         <br>
+        <b>11:00 Retiro District Hall.</b> A brief ceremony will take place here, 
+        followed by a stimulating walk to work up an appetite.<br>
         <br>
-        A brief ceremony will take place at the Retiro District Hall at 11:00 a.m.
+        <b>12:00 Paseo del Prado 48.</b> Fear not! From this point on we’ll be on wheels.<br>
         <br>
+        <b>14:00 Seeds Restauran.</b> 
+        The reception will include a grand banquet and a surprise-packed afternoon.<br>
         <br>
-        A grand banquet will follow at the fabulous Seeds Restaurant from 14:00, where we’ll 
-        stay into the evening surrounded by friends, music, refreshments, and other surprises.
+        <b>22:00 Black Jack Club</b> (better known to us hard-core Madridians as the Cat Temple). 
+        Those of you who can handle it are invited to join us there at the after party!<br>
         <br>
+        See you on <b>June 15, 2024!</b><br>
         <br>
-        And to those of you who can handle it, we will see you at the after party, at the 
-        Black Jack Club (better known to some of us as the Cat Temple) from 22:00!
-        <br>
-        <br>
-        All this and much more, on <b>June 15, 2024</b>.
-        <br>
-        <br>
-        We have created this app so that you can confirm your attendance, as well as provide us
-        with all the information we need to make that day perfect for you too.
-        <br>
-        <br>
-        We look forward to your presence!
+        We have created this awesome trilingual app so that you can confirm your attendance, 
+        as well as provide us with all the information we need to make that day perfect for you too.<br>
         <br>
         <br>
          <h2 align="center">♥ Geno & Massi  ♥</h2>
@@ -34,30 +31,31 @@ def intro_text(lang='en'):
         <br>
         <br></p>
         <p style="font-family:'Courier New'; font-size:15px;"><b><font color='orange'> P.S.: <br> Please, fill in the form by June 1st! </b></p>"""
+        
     if lang == 'es':
-        text = """  <center> <h1>Nos casamos, y queremos celebrarlo CONTIGO!</h1></center> 
+        text = """  <center> <h1>POR FIN NOS CASAMOS!!!</h1></center> 
         <br>
         <br>
-        <p style="font-family:'Courier New';"> Estos son los datos más importantes:
+        <p style="font-family:'Courier New';">Para celebrarlo 
+        hemos preparado un un recorrido turísitico-gastronómico-nupcial al que esperamos que te unas. 
+        Estas son las paradas:<br>
         <br>
+        <b>11:00 Junta Municipal de Distrito de Retiro.</b> Aquí tendrá lugar una sencilla ceremonia 
+        seguida de un estimulante paseo para abrir el apetito.<br>
         <br>
-        Una sencilla ceremonia tendrá lugar en la Junta Municipal de Distrito de Retiro a las 11:00.
+        <b>12:00 Paseo del Prado 48.</b> ¡No temáis! A partir de este momento iremos motorizados.<br>
         <br>
+        <b>14:00 Restaurante Seeds.</b> 
+        Allí se celebrará un banquete por todo lo alto con sobremesa llena de sorpresas.<br>
         <br>
-        Le seguirá un gran banquete en el fabuloso Restaurante Seeds, a partir de las 14:00, y donde
-        pasaremos toda la tarde entre amigos, música, refrigerios, y alguna que otra sorpresa.
+        <b>22:00 Club Black Jack</b> (más conocido para los allegados como el Templo del Gato). 
+        A los que tengáis más aguante, os vemos ahí, en la fiesta post-boda!<br>
         <br>
+        Nos vemos el <b>15 de junio de 2024</b> en alguno de estos puntos de encuentro!<br>
         <br>
-        Y a los que tengáis más aguante, os vemos en la fiesta post-boda en el club Black Jack
-        (más conocido para los allegados como el Templo del Gato) a partir de las 22:00!
-        <br>
-        <br>
-        Todo esto y mucho más, el <b>15 de junio de 2024</b>.
-        <br>
-        <br>
-        Hemos creado esta applicación para que nos puedas confirmar tu asistencia, así como para 
-        trasladarnos toda la información que nos hacen falta para que todo sea perfecto ese día, 
-        también para tí!
+        Hemos creado esta pedazo de applicación tri-lingüe para que nos puedas confirmar tu asistencia, 
+        así como para trasladarnos toda la información que nos hacen falta para que todo sea perfecto ese día, 
+        también para tí!<br>
         <br>
         <br>
         Os esperamos ansiosos!
@@ -67,41 +65,43 @@ def intro_text(lang='en'):
         <br>
         <br>
         <br></p>
-        <p style="font-family:'Courier New'; font-size:15px;"><b><font color='orange'> P.S.: <br> Por favor, mandadnos las respuestas del formulario antes del 1 de junio! </b></p>"""
+        <p style="font-family:'Courier New'; font-size:15px;"><b><font color='orange'> P.D.: <br> Por favor, 
+        mandadnos las respuestas del formulario antes del 1 de junio! </b></p>"""
     if lang == 'it':
-        text = """  <center> <h1>Ci sposiamo e ci piacerebbe festeggiarlo con VOI!</h1></center> 
+        text = """<center> <h1>FINALMENTE CI SPOSIAMO!!!</h1></center> 
         <br>
         <br>
-        <p style="font-family:'Courier New';"> Ecco i dettagli più importanti:
+        <p style="font-family:'Courier New';">Per celebrarlo 
+        abbiamo preparato un tour turistico eno-gastronomico nuziale a cui speriamo ti unirai. 
+        Queste sono le tappe:<br>
+        <br>
+        <b>11:00 Distretto municipale "El Retiro".</b> Qui avrà luogo una semplice cerimonia 
+        seguita da una stimolante passeggiata per aprire l'appetito.<br>
+        <br>
+        <b>12:00 Paseo del Prado 48.</b> Non temete! Da questo momento andremo motorizzati.<br>
+        <br>
+        <b>14:00 Ristorante Seeds.</b> 
+        Qui si terrà un sontuoso banchetto con una dopo cena piena di sorprese.<br>
+        <br>
+        <b>22:00 Black Jack Club</b> (più conosciuto dagli intimi come il Tempio del Gatto). 
+        A coloro che resisteranno, ci vediamo lì, alla festa post-matrimonio!<br>
+        <br>
+        Ci vedremo il <b>15 giugno 2024</b> in uno dei punti di incontro!<br>
+        <br>
+        Abbiamo creato questa favolosa applicazione tri-lingue affinché tu possa confermare la tua presenza, 
+        così come per fornirci tutte le informazioni di cui abbiamo bisogno per rendere perfetto questo giorno, 
+        anche per te!<br>
         <br>
         <br>
-        Una semplice cerimonia avrà luogo presso il Municipio del Distretto di Retiro alle 11:00.
-        <br>
-        <br>
-        Seguirà un grande banchetto nel favoloso Ristorante Seeds, a partire dalle 14:00, dove
-        trascorreremo tutto il pomeriggio tra amici, musica, rinfreschi e qualche sorpresa.
-        <br>
-        <br>
-        E per coloro che hanno più resistenza, ci vediamo alla festa post-matrimonio nel club Black Jack
-        (meglio conosciuto tra gli amici come il Tempio del Gatto) a partire dalle 22:00!
-        <br>
-        <br>
-        Tutto questo e molto altro, il <b>15 giugno 2024</b>.
-        <br>
-        <br>
-        Abbiamo creato questa app per permetterti di confermare la tua presenza,
-        e per fornirci tutte le informazioni necessarie per rendere perfetto questo giorno,
-        anche per te!
-        <br>
-        <br>
-        Attendiamo con ansia la tua risposta!
+        Vi aspettiamo con impazienza!
         <br>
         <br>
          <h2 align="center">♥ Geno & Massi ♥</h2>
         <br>
         <br>
         <br></p>
-        <p style="font-family:'Courier New'; font-size:15px;"><b><font color='orange'> P.S.: <br> Ti preghiamo di inviarci le risposte al modulo prima del 1° giugno! </b></p>"""
+        <p style="font-family:'Courier New'; font-size:15px;"><b><font color='orange'> P.S.: <br> Per favore, 
+        inviateci le risposte al modulo entro il 1 giugno! </b></p>"""
     return text
 
 def default_separator_text(lang='en'):
@@ -211,11 +211,12 @@ def change_widget_labels_text(lang='en'):
         widget_labels['foot_note_1_description'] = """<p style="font-family:'Courier New'; font-size:15px;"><b><font color='orange'>*: Attention! Capacity is limited! <br> We greatly appreciate if you prioritize those coming from outside Madrid :-)</b>"""
         widget_labels['foot_note_2_description'] = """<p style="font-family:'Courier New'; font-size:15px;"><b><font color='orange'>**: Attention! By this time, the little ones should already be in bed, <br> so only adults can attend this part of the event!</b>"""
         widget_labels['foot_note_3_description'] = """<p style="font-family:'Courier New'; font-size:15px;"><b><font color='orange'>***: On my own, at a restaurant yet to be decided!</b>"""
-        retiro_description_pane, restaurant_description_pane, casa_sposi_description_pane, black_jack_description_pane = location_description(lang='en')
+        retiro_description_pane, restaurant_description_pane, casa_sposi_description_pane, black_jack_description_pane, pit_stop_description_pane = location_description(lang='en')
         widget_labels['retiro_description_pane'] = retiro_description_pane
         widget_labels['restaurant_description_pane'] = restaurant_description_pane
         widget_labels['casa_sposi_description_pane'] = casa_sposi_description_pane
         widget_labels['black_jack_description_pane'] = black_jack_description_pane
+        widget_labels['pit_stop_description_pane'] = pit_stop_description_pane
         widget_labels['add_row'] = 'Add New Record'
         widget_labels['remove_row'] = 'Remove Selected Record'
         widget_labels['show_details'] = 'Show Table Details'
@@ -248,11 +249,12 @@ def change_widget_labels_text(lang='en'):
         widget_labels['foot_note_1_description'] = """<p style="font-family:'Courier New'; font-size:15px;"><b><font color='orange'>*: Attenzione! La capacità è limitata! <br> Apprezziamo molto se dai priorità a chi viene da fuori Madrid :-)</b>"""
         widget_labels['foot_note_2_description'] = """<p style="font-family:'Courier New'; font-size:15px;"><b><font color='orange'>**: Attenzione! A quest'ora i più piccoli dovrebbero già essere a letto, <br> quindi solo gli adulti possono partecipare a questa parte dell'evento!</b>"""
         widget_labels['foot_note_3_description'] = """<p style="font-family:'Courier New'; font-size:15px;"><b><font color='orange'>***: Da solo, in un ristorante ancora da decidere!</b>"""
-        retiro_description_pane, restaurant_description_pane, casa_sposi_description_pane, black_jack_description_pane = location_description(lang='it')
+        retiro_description_pane, restaurant_description_pane, casa_sposi_description_pane, black_jack_description_pane, pit_stop_description_pane = location_description(lang='it')
         widget_labels['retiro_description_pane'] = retiro_description_pane
         widget_labels['restaurant_description_pane'] = restaurant_description_pane
         widget_labels['casa_sposi_description_pane'] = casa_sposi_description_pane
         widget_labels['black_jack_description_pane'] = black_jack_description_pane
+        widget_labels['pit_stop_description_pane'] = pit_stop_description_pane
         widget_labels['add_row'] = 'Aggiungi Nuova Riga'
         widget_labels['remove_row'] = 'Rimuovi Righe Selezionate'
         widget_labels['show_details'] = 'Visualizza Dettgli Tabella'
@@ -285,11 +287,12 @@ def change_widget_labels_text(lang='en'):
         widget_labels['foot_note_1_description'] = """<p style="font-family:'Courier New'; font-size:15px;"> <b><font color='orange'>*: Atención! El aforo es limitado! <br> Os agradecemos infinito si le dáis prioridad a los que vienen de fuera de Madrid :-)</b></p>"""
         widget_labels['foot_note_2_description'] = """<p style="font-family:'Courier New'; font-size:15px;"> <b><font color='orange'>**: Atención! A estas horas los peques ya tienen que estar en la cama, <br> así que a esta parte del evento solo podrán asistir los mayores!</b>"""
         widget_labels['foot_note_3_description'] = """<p style="font-family:'Courier New'; font-size:15px;"><b><font color='orange'>***: Por cuenta propia, en un restaurante aún por decidir!</b>"""
-        retiro_description_pane, restaurant_description_pane, casa_sposi_description_pane, black_jack_description_pane = location_description(lang='es')
+        retiro_description_pane, restaurant_description_pane, casa_sposi_description_pane, black_jack_description_pane, pit_stop_description_pane = location_description(lang='es')
         widget_labels['retiro_description_pane'] = retiro_description_pane
         widget_labels['restaurant_description_pane'] = restaurant_description_pane
         widget_labels['casa_sposi_description_pane'] = casa_sposi_description_pane
         widget_labels['black_jack_description_pane'] = black_jack_description_pane
+        widget_labels['pit_stop_description_pane'] = pit_stop_description_pane
         widget_labels['add_row'] = 'Agregar nueva línea'
         widget_labels['remove_row'] = 'Eliminar línea seleccionada'
         widget_labels['show_details'] = 'Mostrar detalles de la tabla'
