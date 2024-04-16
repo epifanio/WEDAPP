@@ -81,10 +81,10 @@ allergy_details_label = pn.pane.HTML(widget_labels['allergy_details_label'], vis
 allergy_details = pn.widgets.TextInput(name='', placeholder='...', visible=False)
 
 
-foot_note_1 = pn.pane.HTML("<b><font color='red'>*</b>")
-foot_note_2 = pn.pane.HTML("<b><font color='red'>**</b>")
-foot_note_3 = pn.pane.HTML("<b><font color='red'>***</b>")
-foot_note_4 = pn.pane.HTML("<b><font color='red'>****</b>")
+foot_note_1 = pn.pane.HTML("<b><font color='orange'>*</b>")
+foot_note_2 = pn.pane.HTML("<b><font color='orange'>**</b>")
+foot_note_3 = pn.pane.HTML("<b><font color='orange'>***</b>")
+foot_note_4 = pn.pane.HTML("<b><font color='orange'>****</b>")
 
 
 foot_note_1_description = pn.pane.HTML(widget_labels['foot_note_1_description'] ) 
