@@ -427,7 +427,7 @@ add_row = pn.widgets.Button(icon=add_svg, description=widget_labels['add_row'] ,
 remove_row = pn.widgets.Button(icon=remove_svg, description=widget_labels['remove_row'], icon_size='2em', button_type='danger')
 
 # show_details = pn.widgets.Button(name=widget_labels['show_details'], button_type='warning')
-show_details = pn.widgets.Button(icon=maximize_svg, description=widget_labels['show_details'], icon_size='1em', button_type='warning')
+show_details = pn.widgets.Button(icon=maximize_svg, description=widget_labels['show_details'], icon_size='2em', button_type='warning')
 
 submit_button = pn.widgets.Button(name=widget_labels['submit_button'], button_type='primary')
 submit_button = pn.widgets.Button(icon=submit_svg, description=widget_labels['submit_button'],  icon_size='2em',  button_type='primary')
