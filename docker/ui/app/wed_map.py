@@ -1,5 +1,5 @@
 
-from ipyleaflet import Map, Marker, Icon, Popup
+from ipyleaflet import Map, Marker, Icon, Popup, LayersControl, FullScreenControl
 from ipywidgets import HTML
 import panel as pn
 #pn.extension()
@@ -47,8 +47,9 @@ def getMap():
     ]
 
     # Add markers with labels
+    markers = []
     for i, (lat, lon) in enumerate(positions):
-        marker = Marker(location=(lat, lon), draggable=False)
+        marker = Marker(location=(lat, lon), draggable=False, name=attributes[i]['name'])
         marker.icon = Icon(icon_url='https://leafletjs.com/examples/custom-icons/leaf-red.png',
                            icon_size=[25, 41], icon_anchor=[12, 41],
                            html=f'<div style="font-size: 12pt; color: black;">{labels[i]}</div>')
@@ -58,11 +59,17 @@ def getMap():
         message_marker = HTML()
         message_marker.value = attributes[i]['description']
         # message_marker.placeholder = attributes[i]['description']
-        message_marker.description = attributes[i]['name']
+        # message_marker.description = attributes[i]['name']
         marker.popup = message_marker
-        
-        m.add_layer(marker)
+        markers.append(marker)
+    for i in markers:    
+        m.add_layer(i)
     
+    control = LayersControl(position='topright')
+    m.add(control)
+    m.add(FullScreenControl())
+
+
     # Display the map and output widget
     return m #display(m)
 
