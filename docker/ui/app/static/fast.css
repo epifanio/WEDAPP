@@ -374,4 +374,13 @@
     display: block;
     overflow-x: auto;
   }
-  
+
+/* ADDED BY OMINIVERDI */
+
+/* hide useless buttons in the top bar */ 
+[slot="checked-message"] {
+    display: none !important;
+}
+.pn-toggle-theme {
+    display: none;
+}
