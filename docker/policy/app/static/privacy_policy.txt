@@ -1,0 +1,27 @@
+Privacy Policy
+
+Effective date: [Date]
+
+[Your Company Name] ("us", "we", or "our") operates the [Your Website Name] website (the "Service").
+
+This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our Service and the choices you have associated with that data.
+
+We use your data to provide and improve the Service. By using the Service, you agree to the collection and use of information in accordance with this policy.
+
+Information Collection and Use
+
+We collect several different types of information for various purposes to provide and improve our Service to you.
+
+Types of Data Collected
+
+Personal Data
+
+While using our Service and opting for OAuth login using Google, we may collect certain personally identifiable information from your Google account that you have consented to share with us. This information may include, but is not limited to:
+
+Your Google account email address
+Your Google account name
+Your Google account profile picture
+Any other information explicitly permitted by Google's OAuth consent screen
+Usage Data
+
+In addition to the information collected through Google OAuth, we may also collect information that your browser sends whenever you visit our Service or when you access the Service by or through a mobile device ("Usage Data").

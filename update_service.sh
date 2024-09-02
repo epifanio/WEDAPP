@@ -1,4 +1,5 @@
-export DOMAIN=$1.epinux.com
+export WEDDAPP_DOMAIN=$1.epinux.com
+export POLICY_DOMAIN=$2.epinux.com
 docker stack rm $1
 sleep 15
 export NODE_ID=$(docker info -f '{{.Swarm.NodeID}}')

@@ -46,4 +46,13 @@ h2 {
   min-zoom: 1;
   zoom: 1;
 }
+form-header {
+  font-size: 20px;
+}
+#logo::before {
+  content: url('new_image_url_here');
+  display: block;
+  width: 150px; /* Set width and height as needed */
+  height: 120px;
+}
 """

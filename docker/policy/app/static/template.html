@@ -1,0 +1,48 @@
+{% extends base %}
+
+<!-- goes in head -->
+{% block postamble %}
+<link rel="stylesheet" href="app/static/bootstrap.min.css">
+<link rel="stylesheet" href="app/static/custom.css">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+{% endblock %}
+
+<!-- goes in body -->
+<body style="background-color:oldlace; padding:25px;">
+{% block contents %}
+{{ app_title }}
+<br>
+<div class="container">
+  <h1>Privacy Policy</h1>
+  <p>This is the privacy policy for [Your Company Name].</p>
+  <p>You can view our privacy policy <a href="app/static/privacy_policy.txt" target="_blank">here</a>.</p>
+  <p>For any questions or concerns, please contact us at [Your Contact Email].</p>
+  embed(roots.A)
+  <div class="row">
+    <iframe src="https://share.zight.com/qGubjQWY?embed=true&amp;title=true&amp;branding=true" width="360" height="279" style="border:none" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowtransparency="true" allowfullscreen="true"></iframe>
+    <div class="col-md-6">
+      <h2>Information Collection and Use</h2>
+      <p>For a better experience, while using our Service, we may require you to provide us with certain personally identifiable information, including but not limited to [Your Name, Email Address, Phone Number, and Address]. The information that we request will be retained by us and used as described in this privacy policy.</p>
+      <p>The app does use third party services that may collect information used to identify you.</p>
+      <p>Link to privacy policy of third party service providers used by the app</p>
+      <ul>
+        <li><a href="[Google Play Services]" target="_blank">Google Play Services</a></li>
+        <li><a href="[Google Analytics for Firebase]" target="_blank">Google Analytics for Firebase</a></li>
+        <li><a href="[Firebase Crashlytics]" target="_blank">Firebase Crashlytics</a></li>
+        <li><a href="[Facebook]" target="_blank">Facebook</a></li>
+        <li><a href="[AdMob]" target="_blank">AdMob</a></li>
+        <li><a href="[Google AdMob]" target="_blank">Google AdMob</a></li>
+        <li><a href="[Fabric]" target="_blank">Fabric</a></li>
+        <li><a href="[Firebase Analytics]" target="_blank">Firebase Analytics</a></li>
+        <li><a href="[Firebase]" target="_blank">Firebase</a></li>
+      </ul>
+    </div>
+    <div class="col-md-6">
+      <h2>Log Data</h2>
+      <p>We want to inform you that whenever you use our Service, in a case of an error in the app we collect data and information (through third party products) on your phone called Log Data. This Log Data may include information such as your device Internet Protocol (“IP”) address, device name, operating system version, the configuration of the app when utilizing our Service, the time and date of your use of the Service, and other statistics.</p>
+      <h2>Cookies</h2>
+      <p>Cookies are files with a small amount of data that are commonly used as anonymous unique identifiers. These are sent to your browser from the websites
+</div>
+</div>
+{% endblock %}
+</body>

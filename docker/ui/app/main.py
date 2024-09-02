@@ -49,12 +49,17 @@ styles = {
     'border-radius': '5px', 'padding': '10px',
 }
 
-table_name = 'guest_list_session4'
+# table_name = 'guest_list_session4'
+table_name = os.environ['GUEST_TABLE'] 
 
 full_table = pn.widgets.Checkbox(name="visualize table details", visible=False)
 full_table.value = True
 
 session_started = dt.now()
+
+def get_session():
+    session_started = dt.now()
+    return session_started
 
 html_intro_pane = pn.pane.HTML(intro_text(lang='en'), styles=styles, sizing_mode="stretch_width")
 
@@ -81,19 +86,20 @@ allergy_details_label = pn.pane.HTML(widget_labels['allergy_details_label'], vis
 allergy_details = pn.widgets.TextInput(name='', placeholder='...', visible=False)
 
 
-foot_note_1 = pn.pane.HTML("<b><font color='orange'>*</b>")
-foot_note_2 = pn.pane.HTML("<b><font color='orange'>**</b>")
-foot_note_3 = pn.pane.HTML("<b><font color='orange'>***</b>")
-foot_note_4 = pn.pane.HTML("<b><font color='orange'>****</b>")
+# foot_note_1 = pn.pane.HTML("<b><font color='orange'>*</b>")
+foot_note_2 = pn.pane.HTML("<b><font color='orange'>*</b>")
+foot_note_3 = pn.pane.HTML("<b><font color='orange'>**</b>")
+foot_note_4 = pn.pane.HTML("<b><font color='orange'>***</b>")
 
 
-foot_note_1_description = pn.pane.HTML(widget_labels['foot_note_1_description'] ) 
+# foot_note_1_description = pn.pane.HTML(widget_labels['foot_note_1_description'] ) 
 foot_note_2_description = pn.pane.HTML(widget_labels['foot_note_2_description'] ) 
 foot_note_3_description = pn.pane.HTML(widget_labels['foot_note_3_description'] ) 
 
 
 def insert_data(event):
     # Connect to PostgreSQL
+    insert_time = get_session()
     conn = psycopg2.connect(
         dbname='mydatabase',
         user='myuser',
@@ -125,7 +131,7 @@ def insert_data(event):
             row['Name'], row['Surname'], row['Age'], row['Cerimony'], row['Banquet'],
             row['Food restrictions'], row['Food restrictions details'],
             row['Allergy'], row['Allergy details'], row['Party'], row['Friday lunch'],
-            row['Friday dinner'], row['Hotel'], row['Room details'], row['Days'], row['Guest'], row['Session'], row['User_id']
+            row['Friday dinner'], row['Hotel'], row['Room details'], row['Days'], row['Guest'], insert_time, row['User_id']
         )
 
         # Execute the insertion query
@@ -192,7 +198,9 @@ def fetch_data(event):
     recent_df.replace({True: 'yes', False: 'no'}, inplace=True)
 
     column_names = list(recent_df.columns)
+    recent_df.drop_duplicates(keep='last', inplace=True)
     dft = recent_df.transpose()
+    
     dft.insert(0, 'Fields', column_names)
     results_widget = pn.widgets.Tabulator(dft, sizing_mode='stretch_width')
     results_widget.hidden_columns = ['index']
@@ -490,10 +498,19 @@ def reset_widgets_values(event):
     number_guest.value = 0
 
 
+def fake_insert():
+    df_widget.value.reset_index(inplace=True, drop=True)
+    data = get_data()
+    data['Name'] = 'name'
+    data['Surname'] = 'Surname'
+    df_widget.value.loc[len(df_widget.value.index)] = data
+    df_widget.value = df_widget.value.drop([0])
+
 def change_data(data):
     # Add a check if mandatory values are set
     # if not, raise a modal dialog to warn about the missing mandatory values
     data = get_data()
+    print(len(data))
     print(data)
     if data['Name'] == '' or data['Surname'] == '': 
         app.modal[0].clear()
@@ -504,10 +521,11 @@ def change_data(data):
         print(widget_labels['modal_0_content'])
         return
     # reset_data()
-    #df.loc[:] = df_widget.value      
+    #df.loc[:] = df_widget.value   
+    print("len df_widget: ", len(df_widget.value))   
     df_widget.value.reset_index(inplace=True, drop=True)
     df_widget.value.loc[len(df_widget.value.index)] = data
-    df_widget.value = df_widget.value.drop(df_widget.selection)
+    df_widget.value = df_widget.value.drop([])
     # reset_widgets_values()
     try:
     #    date_range_picker.value = (session_started, session_started)
@@ -608,7 +626,7 @@ def change_widget_labels(lang='en'):
     room_label.object = widget_labels['room_label'] 
     date_range_picker_label.object = widget_labels['date_range_picker_label'] 
     number_guest_label.object = widget_labels['number_guest_label'] 
-    foot_note_1_description.object = widget_labels['foot_note_1_description'] 
+    # foot_note_1_description.object = widget_labels['foot_note_1_description'] 
     foot_note_2_description.object = widget_labels['foot_note_2_description'] 
     foot_note_3_description.object = widget_labels['foot_note_3_description'] 
     retiro_description_pane.object = widget_labels['retiro_description_pane']
@@ -675,7 +693,7 @@ partecipation_form = pn.Column(default_separator,
                                       submit_button, fetch_data_button),
                                results_log_pane,
                                pn.Spacer(height=20),
-                               foot_note_1_description,
+                               # foot_note_1_description,
                                foot_note_2_description,
                                foot_note_3_description, height=1200)
 
@@ -700,12 +718,12 @@ pit_stop_description_pane = pn.pane.HTML(pit_stop_description, styles=styles, si
 # location_description_pane = pn.GridBox(*[retiro_description_pane,
 #              restaurant_description_pane, casa_sposi_description_pane, black_jack_description_pane], ncols=1, sizing_mode='stretch_both')
 
-location_description_pane = pn.Column(retiro_description_pane, 
-                                   restaurant_description_pane, 
-                                   casa_sposi_description_pane, 
-                                   black_jack_description_pane,
-                                   pit_stop_description_pane,
-                                   sizing_mode='stretch_both')
+location_description_pane = pn.Column(casa_sposi_description_pane,
+                                      retiro_description_pane, 
+                                      pit_stop_description_pane,
+                                      restaurant_description_pane, 
+                                      black_jack_description_pane,
+                                      sizing_mode='stretch_both')
 
 
 
@@ -714,7 +732,29 @@ tabs = pn.Tabs((' Intro ', html_intro_pane),
                (' Map ', pn.Column(pn.Column(leafmap, sizing_mode='stretch_both'), 
                                  pn.pane.HTML("""<p style="font-family:'Courier New'; font-size:25px;"><b>Locations</b></p>"""), 
                                  location_description_pane, sizing_mode='stretch_both')),
-               (' Bank details ', html_donation_pane), dynamic=False)
+               (' Bank details ', html_donation_pane), 
+               ('Help', pn.Row(pn.pane.HTML("""<h2>Keep calm and fill the form!</h2>
+                                            <iframe src="https://share.zight.com/eDuK2YLz?embed=true" 
+                                            width="360" 
+                                            height="198" 
+                                            style="border:none" 
+                                            frameborder="0" 
+                                            allow="accelerometer; 
+                                            autoplay; 
+                                            clipboard-write; 
+                                            encrypted-media; 
+                                            gyroscope; 
+                                            picture-in-picture" 
+                                            allowtransparency="true" 
+                                            allowfullscreen="true"></iframe>"""), 
+                               pn.pane.HTML("""<h2>Contacts</h2><br>
+                                            <b>Genoveva: </b><br><br>
+                                            e-mail: <a href="mailto:selfishgeno@gmail.com">selfishgeno@gmail.com</a></p>
+                                            <p>Phone: +34 686 26 55 96</p>
+                                            <br>
+                                            <b>Massimo:</b><br><br>
+                                            e-mail: <a href="massimodisasha@gmail.com">massimodisasha@gmail.com</a></p>
+                                            <p>Phone: +47 47 66 9874</p>"""))), dynamic=False)
 
 df_widget.disabled = True
 
@@ -745,7 +785,7 @@ app = pn.template.FastListTemplate(
 )
 
 
-
+fake_insert()
 
 app.modal.append(pn.Column())
 app.modal[0].clear()

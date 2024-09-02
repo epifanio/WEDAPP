@@ -9,6 +9,15 @@ services:
       LOG_LEVEL: 'debug'
       BOKEH_LOG_LEVEL: 'debug'
       PYTHONUNBUFFERED: 1
+      POSTGRES_DB: 'mydatabase'
+      POSTGRES_USER: 'myuser'
+      POSTGRES_PASSWORD: 'mypassword'
+      POSTGRES_HOST: 'db'
+      GUEST_TABLE: 'guests'
+      # PANEL_OAUTH_PROVIDER: 'google'
+      # PANEL_OAUTH_KEY: 'my_google_key'
+      # PANEL_OAUTH_SECRET: 'my_google_secret'
+      # PANEL_COOKIE_SECRET: 'my_super_safe_cookie_secret'
       # BOKEH_COOKIE_SECRET: 'my_super_safe_cookie_secret'
       # DOMAIN: weddapp.epinux.com
     networks:
@@ -29,10 +38,10 @@ services:
         - traefik.enable=true
         - traefik.docker.network=traefik-public
         - traefik.constraint-label=traefik-public
-        - traefik.http.routers.weddapp-http.rule=Host(`${DOMAIN?Variable not set}`)
+        - traefik.http.routers.weddapp-http.rule=Host(`${WEDDAPP_DOMAIN?Variable not set}`)
         - traefik.http.routers.weddapp-http.entrypoints=http
         - traefik.http.routers.weddapp-http.middlewares=https-redirect
-        - traefik.http.routers.weddapp-https.rule=Host(`${DOMAIN?Variable not set}`)
+        - traefik.http.routers.weddapp-https.rule=Host(`${WEDDAPP_DOMAIN?Variable not set}`)
         - traefik.http.routers.weddapp-https.entrypoints=https
         - traefik.http.routers.weddapp-https.tls=true
         - traefik.http.routers.weddapp-https.tls.certresolver=le
@@ -49,8 +58,63 @@ services:
       - ./docker/ui/app:/app
       - ./docker/ui/entrypoint.sh:/entrypoint.sh
       - ./docker/ui/credentials.json:/credentials.json
+      - ./docker/ui/app/static/basic_login.html:/opt/venv/lib/python3.10/site-packages/panel/_templates/basic_login.html
+      - ./docker/ui/app/static/logout.html:/opt/venv/lib/python3.10/site-packages/panel/_templates/logout.html
+      - ./docker/ui/app/static/fast.css:/opt/venv/lib/python3.10/site-packages/panel/dist/bundled/fastbasetemplate/fast.css
+      - ./docker/ui/app/static/fast_list_template.html:/opt/venv/lib/python3.10/site-packages/panel/template/fast/list/fast_list_template.html
     entrypoint: /entrypoint.sh
 
+
+  policy:
+    image: epinux/wedapp:latest
+    build:
+      context: ./docker/ui
+    environment:
+      BOKEH_ALLOW_WS_ORIGIN: '0.0.0.0:7000,192.168.0.13:7000,localhost:7000,weddapp.epinux.com,epinux.com:7000,5.161.186.233:7000'
+      PORT: '7000'
+      LOG_LEVEL: 'debug'
+      BOKEH_LOG_LEVEL: 'debug'
+      PYTHONUNBUFFERED: 1
+      # BOKEH_COOKIE_SECRET: 'my_super_safe_cookie_secret'
+      # DOMAIN: weddapp.epinux.com
+    networks:
+      - net
+      - traefik-public
+    deploy:
+      resources:
+        #  limits:
+        #  cpus: '0.50'
+        #  memory: 4096M
+        reservations:
+          cpus: '0.25'
+          memory: 512M
+      placement:
+        constraints:
+          - node.role == manager
+      labels:
+        - traefik.enable=true
+        - traefik.docker.network=traefik-public
+        - traefik.constraint-label=traefik-public
+        - traefik.http.routers.policy-http.rule=Host(`${POLICY_DOMAIN?Variable not set}`)
+        - traefik.http.routers.policy-http.entrypoints=http
+        - traefik.http.routers.policy-http.middlewares=https-redirect
+        - traefik.http.routers.policy-https.rule=Host(`${POLICY_DOMAIN?Variable not set}`)
+        - traefik.http.routers.policy-https.entrypoints=https
+        - traefik.http.routers.policy-https.tls=true
+        - traefik.http.routers.policy-https.tls.certresolver=le
+        - traefik.http.services.policy.loadbalancer.server.port=7000
+        # allow CORS
+        - "traefik.http.middlewares.testheader.headers.accesscontrolallowmethods=GET,OPTIONS,PUT"
+        - "traefik.http.middlewares.testheader.headers.accesscontrolalloworiginlist=*"
+        - "traefik.http.middlewares.testheader.headers.accesscontrolmaxage=100"
+        - "traefik.http.middlewares.testheader.headers.addvaryheader=true"
+    # ports:
+    #   - 7000:7000
+    hostname: policy
+    volumes:
+      - ./docker/policy/app:/app
+      - ./docker/policy/entrypoint.sh:/entrypoint.sh
+    entrypoint: /entrypoint.sh
 
 
   db:
