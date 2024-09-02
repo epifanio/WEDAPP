@@ -44,18 +44,18 @@ def getMap():
 
     
     attributes = [
-        {"name": "Party", "description": f"<b> After Party </b> <br> {gmap_black_jack}"},
-        {"name": "Ricevimento", "description": f"<b>Ricevimento </b> <br> {gmap_restaurant}"},
-        {"name": "Cerimonia", "description": f"<b>Cerimonia </b> <br> {gmap_retiro}"},
+        {"name": "Party", "description": f"<b> After Party - 22:00 </b> <br> {gmap_black_jack}"},
+        {"name": "Ricevimento", "description": f"<b>Ricevimento - 14:30 </b> <br> {gmap_restaurant}"},
+        {"name": "Cerimonia", "description": f"<b>Cerimonia - 11:30 </b> <br> {gmap_retiro}"},
         {"name": "Casa degli Sposi", "description": f"<b>Casa degli Sposi </b> <br>{gmap_casa_sposi}"},
-        {"name": "Pit Stop", "description": f"<b> </b> Pit Stop<br>{gmap_pit_stop}"}
+        {"name": "Pit Stop", "description": f"<b> Pit Stop - 12:30</b> <br>{gmap_pit_stop}"}
     ]
 
     # Add markers with labels
     markers = []
     for i, (lat, lon) in enumerate(positions):
         marker = Marker(location=(lat, lon), draggable=False, name=attributes[i]['name'])
-        marker.icon = Icon(icon_url='https://leafletjs.com/examples/custom-icons/leaf-red.png',
+        marker.icon = Icon(
                            icon_size=[25, 41], icon_anchor=[12, 41],
                            html=f'<div style="font-size: 12pt; color: black;">{labels[i]}</div>')
         marker.attribute = attributes[i]  # Assign attributes to marker
@@ -70,8 +70,9 @@ def getMap():
     for i in markers:    
         m.add_layer(i)
     
-    control = LayersControl(position='topright')
-    m.add(control)
+    # control = LayersControl(position='topright')
+    # m.add(control)
+    
     m.add(FullScreenControl())
 
 
@@ -109,9 +110,9 @@ def location_description(lang='en'):
     gmap_black_jack = f"""<p style="font-family:'Courier New'; font-size:18px;"><a href="{gmap_url_black_jack}" target="_blank"> C. de Trujillos, 7, Centro, 28013 Madrid </a></p>"""
     gmap_pit_stop = f"""<p style="font-family:'Courier New'; font-size:15px;"><a href="{gmap_url_pit_stop}" target="_blank"> P.º del Prado, 48, 28013 Madrid </a></p>"""
 
-    retiro_description = f"""<p style="font-family:'Courier New'; font-size:20px;"><b>{cerimony} </b></p>  {gmap_retiro}"""
-    restaurant_description = f""" <p style="font-family:'Courier New'; font-size:20px;"><b>{restaurant}</b></p>  {gmap_restaurant}"""
+    retiro_description = f"""<p style="font-family:'Courier New'; font-size:20px;"><b>{cerimony} - 11:30 </b></p>  {gmap_retiro}"""
+    restaurant_description = f""" <p style="font-family:'Courier New'; font-size:20px;"><b>{restaurant} - 14:30 </b></p>  {gmap_restaurant}"""
     casa_sposi_description = f""" <p style="font-family:'Courier New'; font-size:20px;"><b>{casa_sposi}</b></p>  {gmap_casa_sposi}"""
-    black_jack_description = f"""<p style="font-family:'Courier New'; font-size:20px;"><b>{party_post_boda}</b></p>  {gmap_black_jack}"""
-    pit_stop_description = f"""<p style="font-family:'Courier New'; font-size:20px;"><b> Pit Stop</b></p>  {gmap_pit_stop}"""
+    black_jack_description = f"""<p style="font-family:'Courier New'; font-size:20px;"><b>{party_post_boda} - 22:00 </b></p>  {gmap_black_jack}"""
+    pit_stop_description = f"""<p style="font-family:'Courier New'; font-size:20px;"><b> Pit Stop - 12:30 </b></p>  {gmap_pit_stop} """
     return retiro_description, restaurant_description, casa_sposi_description, black_jack_description, pit_stop_description
